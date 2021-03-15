@@ -4,6 +4,23 @@
 @selected_domains = new ReactiveArray []
 @selected_emotions = new ReactiveArray []
 
+
+
+Meteor.setInterval ()->
+    # navigator.geolocation.getCurrentPosition((position)->
+    #     Session.set('lat', position.coords.latitude)
+    #     Session.set('lon', position.coords.longitude)
+    # , 5000);
+
+Template.location.helpers
+    pos:-> 
+        console.log Geolocation.currentLocation()
+        Geolocation.currentLocation()
+    # lat: ()-> Geolocation.latLng().lat
+    # lon: ()-> Geolocation.latLng().lon
+
+
+
 Template.admin.helpers
     doc_count: ->
         Docs.find().count()
@@ -19,28 +36,28 @@ Template.agg_tag.onCreated ->
 Template.home.onCreated ->
     Session.setDefault('current_query', '')
     # Session.setDefault('dummy', true)
-    @autorun => @subscribe 'terms',
-        selected_tags.array()
-    @autorun => @subscribe 'tag_results',
-        selected_tags.array()
-        # selected_subreddits.array()
-        # selected_domains.array()
-        # selected_authors.array()
-        # selected_emotions.array()
-        Session.get('current_query')
-        Session.get('searching')
-        Session.get('dummy')
-        # Session.get('date_setting')
-    @autorun => @subscribe 'doc_results',
-        selected_tags.array()
-        # Session.get('current_query')
+    # @autorun => @subscribe 'terms',
+    #     selected_tags.array()
+    # @autorun => @subscribe 'tag_results',
+    #     selected_tags.array()
+    #     # selected_subreddits.array()
+    #     # selected_domains.array()
+    #     # selected_authors.array()
+    #     # selected_emotions.array()
+    #     Session.get('current_query')
+    #     Session.get('searching')
+    #     Session.get('dummy')
+    #     # Session.get('date_setting')
+    # @autorun => @subscribe 'doc_results',
+    #     selected_tags.array()
+    #     # Session.get('current_query')
 
-        # selected_subreddits.array()
-        # selected_domains.array()
-        # selected_authors.array()
-        # selected_emotions.array()
-        Session.get('dummy')
-        # Session.get('date_setting')
+    #     # selected_subreddits.array()
+    #     # selected_domains.array()
+    #     # selected_authors.array()
+    #     # selected_emotions.array()
+    #     Session.get('dummy')
+    #     # Session.get('date_setting')
 
 Template.tone.events
     # 'click .upvote_sentence': ->

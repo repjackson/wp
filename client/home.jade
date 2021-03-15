@@ -1,116 +1,133 @@
 template(name='home')
-    .ui.stackable.padded.grid
-        .row
-            .sixteen.wide.column
-                each selected_tags
-                    button.ui.active.compact.circular.large.button.unselect_tag(tabindex="0" class="#{loading_class} #{active_term_class}")
-                        if term.image
-                            img.ui.mini.inline.image(src=term.image)
-                        .ui.inline.small.header #{this}
-                        //- button.ui.active.large.circular.button.unselect_tag(tabindex='0' style=background_style class=emotion_color)
-                //- .ui.inline.small.header(class=emotion_color) {{fixed omega_doc.current_max_emotion_percent}}% #{omega_doc.current_most_emotion}
-                        
-                .ui.left.icon.search.large.input
-                    unless is_loading
-                        if home_subs_ready
-                            i.search.link.icon.refresh_agg
-                    unless home_subs_ready
-                        i.yin.yang.big.loading.link.icon.reconnect
-                    if is_loading
-                        i.yin.yang.big.loading.large.icon
-                    //- input#search(type='text' autofocus='' autocomplete="off" value=current_query)
-                    input#search(type='text' autofocus='' autocomplete="off")
-                //- .ui.header #{connection.status}
-                //- div
-                unless connected
-                    //- .ui.header disconnected
-                    //- .ui.hidden.divider
-                    i.lightning.invert.yellow.big.circular.link.icon
-                //- div
-                if connected
-                    if searching 
-                        each terms 
-                            +search_term
-                    else 
-                        each agg_tags
-                            +agg_tag
-                        //- .four.wide.right.aligned.column
-                        //- .spacer
-                        //- .ui.small.grey.header media
-                        //- .spacer
-                        //- .ui.small.grey.header
-                        //-     i.brain.icon
-                        //-     |emotions
-                        // each selected_emotions
-                        //     .ui.compact.circular.active.large.button.unselect_emotion #{this}
-                        // each emotion_results
-                        //     if title.length
-                        //         .ui.compact.circular.large.basic.button.select_emotion(class=emotion_selector_class)
-                        //             small #{count}
-                        //             |#{title}
-                        //- div
-                        //- .ui.circular.icon.disabled.button 
-                        //-     i.picture.large.icon
-                        //- .ui.circular.icon.disabled.button 
-                        //-     i.video.large.icon
-                        //- .ui.circular.icon.disabled.button 
-                        //-     i.content.large.icon
-                        //- div
-                        // small #{curent_date_setting}
-                        // .ui.compact.circular.button.set_all_time
-                        //     i.calendar.outline.icon
-                        //     |all time
-                        // .ui.compact.circular.button.set_today
-                        //     i.sun.icon
-                        //     |today
-                        //- .spacer
-                        //- .ui.small.grey.inline.header
-                        //-     i.reddit.icon
-                        //-     |subreddits
-                        //- each selected_subreddits
-                        //-     .ui.compact.circular.active.button.unselect_subreddit #{this}
-                        //- each subreddit_results
-                        //-     .ui.compact.circular.button.select_subreddit #{title}
-                        //- .spacer
-                        //- .ui.small.grey.header
-                        //-     i.user.outline.icon
-                        //-     |authors
-                        //- .spacer
-                        //- div
-                        //- .ui.small.grey.inline.header 
-                        //-     i.globe.icon
-                        //-     |domains
-                        // each selected_domains
-                        //     .ui.compact.circular.active.button.unselect_domain #{this}
-                        // each domain_results
-                        //     if title.length
-                        //         .ui.compact.circular.button.select_domain #{title}
-            .sixteen.wide.column.scrolling
-                if one_result
-                    each doc_results
-                        +one_doc
-                if two_posts
-                    .ui.stackable.grid
-                        .two.column.row
-                            each doc_results
-                                +doc_card
-                if three_posts
-                    .ui.stackable.grid
-                        .three.column.row
-                            each doc_results
-                                +small_card
-                if four_posts
-                    .ui.stackable.grid
-                        .four.column.row
-                            each doc_results
-                                +small_card
-                if more_than_four
-                    //- .ui.selection.list
-                    .ui.stackable.grid
-                        .four.column.row
-                            each doc_results
-                                +small_card
-            
+    if currentUser
+        .ui.stackable.padded.grid
+            .row
+                .sixteen.wide.column
+                    each selected_tags
+                        button.ui.active.compact.circular.large.button.unselect_tag(tabindex="0" class="#{loading_class} #{active_term_class}")
+                            if term.image
+                                img.ui.mini.inline.image(src=term.image)
+                            .ui.inline.small.header #{this}
+                            //- button.ui.active.large.circular.button.unselect_tag(tabindex='0' style=background_style class=emotion_color)
+                    //- .ui.inline.small.header(class=emotion_color) {{fixed omega_doc.current_max_emotion_percent}}% #{omega_doc.current_most_emotion}
+                            
+                    .ui.left.icon.search.large.input
+                        unless is_loading
+                            if home_subs_ready
+                                i.search.link.icon.refresh_agg
+                        unless home_subs_ready
+                            i.yin.yang.big.loading.link.icon.reconnect
+                        if is_loading
+                            i.yin.yang.big.loading.large.icon
+                        //- input#search(type='text' autofocus='' autocomplete="off" value=current_query)
+                        input#search(type='text' autofocus='' autocomplete="off")
+                    //- .ui.header #{connection.status}
+                    //- div
+                    unless connected
+                        //- .ui.header disconnected
+                        //- .ui.hidden.divider
+                        i.lightning.invert.yellow.big.circular.link.icon
+                    //- div
+                    if connected
+                        if searching 
+                            each terms 
+                                +search_term
+                        else 
+                            each agg_tags
+                                +agg_tag
+                            //- .four.wide.right.aligned.column
+                            //- .spacer
+                            //- .ui.small.grey.header media
+                            //- .spacer
+                            //- .ui.small.grey.header
+                            //-     i.brain.icon
+                            //-     |emotions
+                            // each selected_emotions
+                            //     .ui.compact.circular.active.large.button.unselect_emotion #{this}
+                            // each emotion_results
+                            //     if title.length
+                            //         .ui.compact.circular.large.basic.button.select_emotion(class=emotion_selector_class)
+                            //             small #{count}
+                            //             |#{title}
+                            //- div
+                            //- .ui.circular.icon.disabled.button 
+                            //-     i.picture.large.icon
+                            //- .ui.circular.icon.disabled.button 
+                            //-     i.video.large.icon
+                            //- .ui.circular.icon.disabled.button 
+                            //-     i.content.large.icon
+                            //- div
+                            // small #{curent_date_setting}
+                            // .ui.compact.circular.button.set_all_time
+                            //     i.calendar.outline.icon
+                            //     |all time
+                            // .ui.compact.circular.button.set_today
+                            //     i.sun.icon
+                            //     |today
+                            //- .spacer
+                            //- .ui.small.grey.inline.header
+                            //-     i.reddit.icon
+                            //-     |subreddits
+                            //- each selected_subreddits
+                            //-     .ui.compact.circular.active.button.unselect_subreddit #{this}
+                            //- each subreddit_results
+                            //-     .ui.compact.circular.button.select_subreddit #{title}
+                            //- .spacer
+                            //- .ui.small.grey.header
+                            //-     i.user.outline.icon
+                            //-     |authors
+                            //- .spacer
+                            //- div
+                            //- .ui.small.grey.inline.header 
+                            //-     i.globe.icon
+                            //-     |domains
+                            // each selected_domains
+                            //     .ui.compact.circular.active.button.unselect_domain #{this}
+                            // each domain_results
+                            //     if title.length
+                            //         .ui.compact.circular.button.select_domain #{title}
+                .sixteen.wide.column.scrolling
+                    if one_result
+                        each doc_results
+                            +one_doc
+                    if two_posts
+                        .ui.stackable.grid
+                            .two.column.row
+                                each doc_results
+                                    +doc_card
+                    if three_posts
+                        .ui.stackable.grid
+                            .three.column.row
+                                each doc_results
+                                    +small_card
+                    if four_posts
+                        .ui.stackable.grid
+                            .four.column.row
+                                each doc_results
+                                    +small_card
+                    if more_than_four
+                        //- .ui.selection.list
+                        .ui.stackable.grid
+                            .four.column.row
+                                each doc_results
+                                    +small_card
+    unless currentUser
+        +login
+    +location
+template(name='location')        
+    .ui.header pos #{pos}
+    .ui.list
+        with pos.coords
+            .item accuracy #{accuracy}
+            .item altitude #{altitude}
+            .item altitudeAccuracy #{altitudeAccuracy}
+            .item heading #{heading}
+            .item latitude #{latitude}
+            .item longitude #{longitude}
+            .item speed #{speed}
+            .item timestamp #{timestamp}
+    .ui.header lat #{lat}
+    .ui.header lon #{lon}
             
 template(name='search_term')
     button.ui.big.compact.button.select_query
