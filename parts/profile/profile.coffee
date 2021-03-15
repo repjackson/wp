@@ -17,10 +17,6 @@ if Meteor.isClient
   
     Template.profile.events
     
-        'click a.select_term': ->
-            $('.profile_yield')
-                .transition('fade out', 200)
-                .transition('fade in', 200)
     
 
         'click .logout': ->

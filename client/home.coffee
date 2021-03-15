@@ -15,10 +15,23 @@ Template.map.helpers
     # lat: ()-> Geolocation.latLng().lat
     # lon: ()-> Geolocation.latLng().lon
 
+Template.body.events
+    'click a': ->
+        $('.main_content')
+            .transition('fade out', 250)
+            .transition('fade in', 250)
 
 
 Template.map.onRendered ->
-    map = L.map('mapid').setView([51.505, -0.09], 13);
+    pos = Geolocation.currentLocation()
+    console.log Geolocation.currentLocation()
+
+    console.log Geolocation.latLng();
+
+    # pos.coords.latitude
+    # pos.coords.longitude
+    # if Session.get('current_lat')
+    #     map = L.map('mapid').setView([Session.get('current_lat'), Session.get('current_long')], 13);
     # L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     #     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     #     maxZoom: 18,
@@ -27,18 +40,18 @@ Template.map.onRendered ->
     #     zoomOffset: -1,
     #     accessToken: 'your.mapbox.access.token'
     # }).addTo(mymap);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    # L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    #     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    # }).addTo(map);
     
-    L.marker([51.5, -0.09]).addTo(map)
-        .bindPopup('person')
-        .openPopup();
+    # L.marker([51.5, -0.09]).addTo(map)
+    #     .bindPopup('person')
+    #     .openPopup();
 
-    L.marker([53.5, -0.1]).addTo(map)
-        .bindPopup('person')
-        .openPopup();
-
+    # L.marker([53.5, -0.1]).addTo(map)
+    #     .bindPopup('person')
+    #     .openPopup();
+    
 
     home_subs_ready: ->
         Template.instance().subscriptionsReady()
@@ -50,8 +63,33 @@ Template.map.onRendered ->
     #         Session.set('global_subs_ready', false)
 
 
-
-
+Template.map.events
+    'click .refresh': ->
+        console.log Geolocation.currentLocation();
+        pos = Geolocation.currentLocation()
+        pos.coords.latitude
+        Session.set('current_lat', pos.coords.latitude)
+        Session.set('current_long', pos.coords.longitude)
+        map = L.map('mapid').setView([Session.get('current_lat'), Session.get('current_long')], 13);
+        # L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        #     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        #     maxZoom: 18,
+        #     id: 'mapbox/streets-v11',
+        #     tileSize: 512,
+        #     zoomOffset: -1,
+        #     accessToken: 'your.mapbox.access.token'
+        # }).addTo(mymap);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+        # L.marker([51.5, -0.09]).addTo(map)
+        #     .bindPopup('person')
+        #     .openPopup();
+    
+        # L.marker([53.5, -0.1]).addTo(map)
+        #     .bindPopup('person')
+        #     .openPopup();
 
 
 Template.image_edit.events

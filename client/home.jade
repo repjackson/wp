@@ -11,7 +11,9 @@ template(name='nav')
 
 template(name='map')
     #mapid
-    .ui.header pos #{pos}
+    .ui.large.button.refresh
+        i.marker.icon
+        |reload location data
     .ui.list
         with pos.coords
             .item accuracy #{accuracy}
@@ -22,8 +24,6 @@ template(name='map')
             .item longitude #{longitude}
             .item speed #{speed}
             .item timestamp #{timestamp}
-    .ui.header lat #{lat}
-    .ui.header lon #{lon}
             
             
             
