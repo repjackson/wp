@@ -5,7 +5,7 @@ template(name='recently')
             .ui.input
                 input.add_live_post(type='text' placeholder="Type your live post...")
         .scrolling
-            each posts
+            each recent_posts
                 +recent_post
                 
                 
@@ -19,3 +19,5 @@ template(name='recent_post')
                     if author.age
                         |#{author.age}
                 |#{when}
+                div
+                |!{content}

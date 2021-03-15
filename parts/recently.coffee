@@ -12,9 +12,9 @@ if Meteor.isClient
         @autorun -> Meteor.subscribe 'recent_posts'
   
     Template.recently.helpers
-        checkins: ->
+        recent_posts: ->
             Docs.find
-                model:'checkin'
+                model:'live_post'
     Template.recently.events
         'keyup .add_live_post': (e,t)->
             if e.which is 13

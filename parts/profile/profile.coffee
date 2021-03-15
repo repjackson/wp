@@ -17,6 +17,10 @@ if Meteor.isClient
   
     Template.profile.events
     
+        'click a.select_term': ->
+            $('.profile_yield')
+                .transition('fade out', 200)
+                .transition('fade in', 200)
     
 
         'click .logout': ->
@@ -138,6 +142,6 @@ if Meteor.isServer
             limit:20
             sort: _timestamp:-1
         })
-    Meteor.publish 'current_user', (username)->
-        Meteor.users.find Meteor.userId()
+    # Meteor.publish 'current_user', (username)->
+    #     Meteor.users.find Meteor.userId()
         

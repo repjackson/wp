@@ -27,12 +27,16 @@ Meteor.publish 'doc', (doc_id)->
 Meteor.publish 'me', (title)->
     Meteor.users.find Meteor.userId()
 
-Meteor.publish 'terms', (selected_tags, searching, query)->
+Meteor.publish 'current_user', (username)->
     # console.log 'selected tags looking for terms', selected_tags
     # console.log 'looking for tags', Tags.find().fetch()
-    Terms.find
-        image:$exists:true
-        title:$in:selected_tags
+    Meteor.users.find
+        username:username
+
+
+Meteor.publish 'nearby_people', ()->
+    Meteor.users.find {},
+        limit:10
 
 
 

@@ -9,7 +9,7 @@ template(name='profile')
                     i.big.toggle.on.icon
             .row
                 .sixteen.wide.center.aligned.column
-                    img.ui.centered.medium.circular.spaced.rounded.image.zoomer(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}")
+                    img.ui.centered.medium.circular.spaced.image.zoomer(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}")
                     div
                     span.mobile.only
                         a(href="/user/#{username}/")
@@ -21,8 +21,8 @@ template(name='profile')
                     .ui.label #{profile_views} views
                     +user_follow_button
     
-                    .ui.big.button.checkin
-                        |checkin
+                    // .ui.big.button.checkin
+                    //     |checkin
                     if is_admin
                         a.ui.icon.button(href="/user/#{username}/edit" title='admin edit account')
                             i.shield.large.icon
@@ -45,12 +45,12 @@ template(name='profile')
                             +textarea_edit key='about' label='about' direct=true
                         .eight.wide.column
                             +array_edit key='tags' label='tags' direct=true
-                    .ui.header latest checkins
-                    .ui.selection.list
-                        each user_checkins
-                            .item #{location_ob}
-                            |#{when}
-                    .ui.header socials
+                    // .ui.header latest checkins
+                    // .ui.selection.list
+                    //     each user_checkins
+                    //         .item #{location_ob}
+                    //         |#{when}
+                    // .ui.header socials
                     .ui.five.column.grid
                         .column
                             i.big.youtube.red.icon
@@ -76,21 +76,17 @@ template(name='profile')
 template(name='user_follow_button')
     unless is_current_user
         if is_following
-            .ui.black.animated.fade.button.unfollow(title='unfollow')
+            .ui.black.animated.fade.big.circular.teal.button.unfollow(title='unfollow')
                 .hidden.content
                     i.minus.large.icon
                     |unfollow
                 .visible.content
                     i.checkmark.large.icon
-                    |follow
+                    |following
         else
-            .ui.animated.fade.button.follow(title='follow')
-                .hidden.content
-                    i.plus.large.icon
-                    |follow
-                .visible.content
-                    i.user.plus.large.icon
-                    |follow
+            .ui.big.circular.teal.button.follow(title='follow')
+                i.plus.large.icon
+                |follow
 
 
 

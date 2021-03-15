@@ -131,7 +131,7 @@ a.title, #title {
     border-radius:10px !important;
 }
 
-.ui.embed, .ui.text, .invert, img{
+.ui.embed, .ui.text, .invert, img:not('.circular'){
     border-radius: 10px !important;
     /*filter: invert(1) !important;*/
 }

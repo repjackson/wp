@@ -3,27 +3,45 @@ template(name='nav')
         a.icon.item(href="/recently" class="{{isActiveRoute regex='recently'}}")
             i.clock.large.icon
         a.icon.item(href="/map" class="{{isActiveRoute 'map'}}")
-            i.marker.large.icon
-        a.icon.item(href="/user/#{currentUser.username}" class="{{isActiveRoute regex='profile'}}")
-            i.user.large.icon
+            i.marker.big.icon
+        if currentUser
+            a.icon.item(href="/user/#{currentUser.username}" class="{{isActiveRoute regex='profile'}}")
+                i.user.large.icon
+        else
+            a.icon.item(href="/login" class="{{isActiveRoute regex='login'}}")
+                i.sign.in.large.icon
+        
 
 
 
 template(name='map')
     #mapid
-    .ui.large.button.refresh
-        i.marker.icon
-        |reload location data
-    .ui.list
-        with pos.coords
-            .item accuracy #{accuracy}
-            .item altitude #{altitude}
-            .item altitudeAccuracy #{altitudeAccuracy}
-            .item heading #{heading}
-            .item latitude #{latitude}
-            .item longitude #{longitude}
-            .item speed #{speed}
-            .item timestamp #{timestamp}
+    unless pos
+        .ui.large.compact.basic.fluid.button.refresh
+            i.marker.icon
+            |reload location data
+    .small.header People Near You
+    .ui.four.column.grid
+        each nearby_people
+            .column
+                .segment
+                    img.ui.tiny.circular.image.zoomer(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}")
+                    .content
+                        a.ui.header(href="/user/#{username}") #{username}, 
+                            if age
+                                |#{age}
+                        |!{about}
+    if is_admin
+        .ui.list
+            with pos.coords
+                .item accuracy #{accuracy}
+                .item altitude #{altitude}
+                .item altitudeAccuracy #{altitudeAccuracy}
+                .item heading #{heading}
+                .item latitude #{latitude}
+                .item longitude #{longitude}
+                .item speed #{speed}
+                .item timestamp #{timestamp}
             
             
             
