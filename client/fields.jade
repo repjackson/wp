@@ -40,3 +40,38 @@ template(name='image_edit')
                 //     |autotag
             else
                 input(type='file' name='upload_image' accept='image/*' )        
+                
+                
+                
+template(name='boolean_edit')
+    //- div
+    .ui.circular.button.toggle_boolean(class="#{boolean_toggle_class} #{classes}" title=tooltip)
+        if field_value
+            i.green.checkmark.icon
+        else
+            i.circle.outline.icon
+        //- .ui.compact.button.toggle_boolean(class=boolean_toggle_class)
+        // if icon
+            // +icon name=icon cl='ui avatar image'
+        .inline.f12
+            //- if field_value
+            //-     i.checkmark.icon
+            if label
+                |#{label}
+            else if key
+                |#{key}
+            else
+                |#{this}
+        div
+        //- 
+        //- if field_value
+        //-     if true_icon
+        //-         i.large.green.icon(class=true_icon)
+        //-     else
+        //-         |yes
+        //- else
+        //-     if false_icon
+        //-         i.large.icon(class=false_icon)
+        //-     else
+        //-         |no
+                

@@ -88,6 +88,20 @@ Template.registerHelper 'gif_filename', () ->
     @url.slice(0,-1)
     # true
 
+
+Template.registerHelper 'field_value', () ->
+    # console.log @
+    parent = Template.parentData()
+
+    # if @direct
+    parent_doc = Docs.findOne Template.parentData()._id
+    user_doc = Meteor.users.findOne Template.parentData()
+    # user = Template.parentData()
+    if parent
+        parent["#{@key}"]
+
+
+
 Template.registerHelper 'current_doc', () ->
     Docs.findOne Router.current().params.doc_id
 

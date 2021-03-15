@@ -8,6 +8,16 @@ Docs.allow
         #     true
         # else
         #     user_id is doc._author_id
+Meteor.users.allow
+    insert: (user_id, doc) -> true
+    update: (user_id, doc) -> true
+    # user_id is doc._author_id
+    remove: (user_id, doc) -> false
+        # user = Meteor.users.findOne user_id
+        # if user.roles and 'admin' in user.roles
+        #     true
+        # else
+        #     user_id is doc._author_id
 # Facts.setUserIdFilter(()->true);
 
 Meteor.publish 'doc', (doc_id)->

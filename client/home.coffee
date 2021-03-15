@@ -66,9 +66,16 @@ Template.image_edit.events
                     console.error 'Error uploading', err
                 else
                     doc = Docs.findOne parent._id
+                    user = Meteor.users.findOne parent._id
                     if doc
                         Docs.update parent._id,
                             $set:"#{@key}":res.public_id
+                    else 
+                        Meteor.users.update parent._id,
+                            $set:"#{@key}":res.public_id
+
+
+
 
     'blur .cloudinary_id': (e,t)->
         cloudinary_id = t.$('.cloudinary_id').val()
@@ -80,6 +87,7 @@ Template.image_edit.events
     'click #remove_photo': ->
         parent = Template.parentData()
 
+        user = Meteor.users.findOne parent._id
         if confirm 'remove photo?'
             # Docs.update parent._id,
             #     $unset:"#{@key}":1
@@ -87,7 +95,10 @@ Template.image_edit.events
             if doc
                 Docs.update parent._id,
                     $unset:"#{@key}":1
-                    
+           else 
+                Meteor.users.update parent._id,
+                    $unset:"#{@key}":1
+         
             
 Template.textarea_edit.events
     # 'click .toggle_edit': (e,t)->
@@ -96,10 +107,14 @@ Template.textarea_edit.events
     'blur .edit_textarea': (e,t)->
         textarea_val = t.$('.edit_textarea').val()
         parent = Template.parentData()
+        user = Meteor.users.findOne parent._id
 
         doc = Docs.findOne parent._id
         if doc
             Docs.update parent._id,
+                $set:"#{@key}":textarea_val
+        else 
+            Meteor.users.update parent._id,
                 $set:"#{@key}":textarea_val
 
 
@@ -107,10 +122,14 @@ Template.text_edit.events
     'blur .edit_text': (e,t)->
         val = t.$('.edit_text').val()
         parent = Template.parentData()
+        user = Meteor.users.findOne parent._id
 
         doc = Docs.findOne parent._id
         if doc
             Docs.update parent._id,
+                $set:"#{@key}":val
+        else 
+            Meteor.users.update parent._id,
                 $set:"#{@key}":val
 
 
@@ -120,8 +139,13 @@ Template.number_edit.events
         parent = Template.parentData()
         val = parseInt t.$('.edit_number').val()
         doc = Docs.findOne parent._id
+        user = Meteor.users.findOne parent._id
+
         if doc
             Docs.update parent._id,
+                $set:"#{@key}":val
+        else 
+            Meteor.users.update parent._id,
                 $set:"#{@key}":val
 
 Template.array_edit.events
@@ -141,8 +165,13 @@ Template.array_edit.events
             if element_val.length>0
                 parent = Template.parentData()
                 doc = Docs.findOne parent._id
+                user = Meteor.users.findOne parent._id
+                
                 if doc
                     Docs.update parent._id,
+                        $addToSet:"#{@key}":element_val
+                else 
+                    Meteor.users.update parent._id,
                         $addToSet:"#{@key}":element_val
                 # window.speechSynthesis.speak new SpeechSynthesisUtterance element_val
                 t.$('.new_element').val('')
@@ -157,6 +186,9 @@ Template.array_edit.events
         doc = Docs.findOne parent._id
         if doc
             Docs.update parent._id,
+                $pull:"#{field.key}":element
+        else 
+            Meteor.users.update parent._id,
                 $pull:"#{field.key}":element
 
         t.$('.new_element').focus()

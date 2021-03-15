@@ -16,6 +16,16 @@ if Meteor.isClient
             Docs.find
                 model:'checkin'
     Template.recently.events
+        'keyup .add_live_post': (e,t)->
+            if e.which is 13
+                e.preventDefault()
+                content = t.$('.add_live_post').val().trim()
+                if content.length>0
+                    parent = Template.parentData()
+                    Docs.insert 
+                        model:'live_post'
+                        content:content
+                    content = t.$('.add_live_post').val('')
         'click .mark_viewed': ->
             console.log @
 
