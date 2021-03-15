@@ -9,7 +9,7 @@ if Meteor.isClient
         @autorun -> Meteor.subscribe 'current_user', Router.current().params.username
         @autorun -> Meteor.subscribe 'user_post_count', Router.current().params.username
         @autorun -> Meteor.subscribe 'user_comment_count', Router.current().params.username
-        @autorun -> Meteor.subscribe 'recent_checkins'
+        @autorun -> Meteor.subscribe 'recent_posts'
   
     Template.recently.helpers
         checkins: ->
@@ -29,13 +29,13 @@ if Meteor.isClient
         'click .mark_viewed': ->
             console.log @
 
-    Template.recent_checkin.onCreated ->
+    Template.recent_post.onCreated ->
         @autorun => Meteor.subscribe 'author_from_id', @data._id
         
 if Meteor.isServer
-    Meteor.publish 'recent_checkins', ->
+    Meteor.publish 'recent_posts', ->
         Docs.find 
-            model:'checkin'
+            model:'live_post'
         , limit:20    
         
     Meteor.publish 'author_from_id', (doc_id)->

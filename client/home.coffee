@@ -25,6 +25,12 @@ Template.body.events
 Template.map.onRendered ->
     pos = Geolocation.currentLocation()
     console.log Geolocation.currentLocation()
+    pos = Geolocation.currentLocation()
+    if pos
+        pos.coords.latitude
+        Session.set('current_lat', pos.coords.latitude)
+        Session.set('current_long', pos.coords.longitude)
+        map = L.map('mapid').setView([Session.get('current_lat'), Session.get('current_long')], 17);
 
     console.log Geolocation.latLng();
 
@@ -70,7 +76,7 @@ Template.map.events
         pos.coords.latitude
         Session.set('current_lat', pos.coords.latitude)
         Session.set('current_long', pos.coords.longitude)
-        map = L.map('mapid').setView([Session.get('current_lat'), Session.get('current_long')], 13);
+        map = L.map('mapid').setView([Session.get('current_lat'), Session.get('current_long')], 17);
         # L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         #     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         #     maxZoom: 18,
@@ -79,8 +85,13 @@ Template.map.events
         #     zoomOffset: -1,
         #     accessToken: 'your.mapbox.access.token'
         # }).addTo(mymap);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            accessToken:"pk.eyJ1IjoicmVwamFja3NvbiIsImEiOiJja21iN3V5OWgwMGI4Mm5temU0ZHk3bjVsIn0.3nq7qTUAh0up18iIIuOPrQ"
+            maxZoom: 18,
+            id: 'mapbox/dark-v10',
+            tileSize: 512,
+            zoomOffset: -1,
         }).addTo(map);
         
         # L.marker([51.5, -0.09]).addTo(map)
