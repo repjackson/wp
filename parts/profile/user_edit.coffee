@@ -63,7 +63,7 @@ if Meteor.isClient
                         if err
                             alert err
                         else
-                            Router.go("/u/#{new_username}")
+                            Router.go("/user/#{new_username}")
 
 
 

@@ -1,0 +1,6 @@
+template(name='recently')
+    .ui.header recently near you
+    each checkins
+        .ui.segment
+            .ui.header #{_author_username}
+                |#{when}

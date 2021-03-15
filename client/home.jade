@@ -1,14 +1,12 @@
 template(name='nav')
     .ui.fluid.attached.borderless.inverted.teal.three.item.menu
-        // a.icon.item.toggle_sidebar.no_blink
-        //     i.bars.icon
-    
-        a.icon.item.blink.clear(href="/" class="{{isActiveRoute regex='home'}}")
+        a.icon.item.blink.clear(href="/recently" class="{{isActiveRoute regex='recently'}}")
             i.clock.large.icon
         a.icon.item.blink.clear(href="/map" class="{{isActiveRoute 'people'}}")
             i.marker.large.icon
         a.icon.item.blink.clear(href="/user/#{currentUser.username}" class="{{isActiveRoute regex='home'}}")
             i.user.large.icon
+
 
 
 template(name='map')
@@ -27,3 +25,67 @@ template(name='map')
     .ui.header lat #{lat}
     .ui.header lon #{lon}
             
+            
+            
+template(name='text_edit')
+    div
+    if icon
+        //- i.grey.icon(class=icon)
+        +icon name=icon cl='ui avatar image'
+    .ui.inline.small.header
+        if title
+            |#{title}
+        else if label
+            |#{label}
+        else if key
+            |#{key}
+            //- +clear_value
+    .ui.icon.large.fluid.input
+        input.edit_text(type='text' value=field_value placeholder=placeholder autocomplete="off")
+        
+        
+        
+template(name='array_edit')
+    // .spacer
+    // if icon
+    //     i.grey.icon(class=icon)
+    //     // +icon name=icon cl='ui avatar image'
+    // .ui.inline.header
+    //     |#{field_value.length}
+    //     if title
+    //         |#{title}
+    //     else if label
+    //         |#{label}
+    //     else if key
+    //         |#{key}
+    .ui.icon.input
+        i.icon(class=icon)
+        input.new_element(type='text' placeholder="#{field_value.length} #{label}" autocomplete="off")
+    if field_value
+        each field_value
+            if currentUser
+                .ui.basic.label.touch_element
+                    i.delete.icon.remove_element
+                    |#{this}
+                // .ui.compact.button.pick_tag
+                //     |#{this}
+            else
+                .ui.compact.basic.button.pick_tag
+                    |#{this}
+
+template(name='textarea_edit')
+    .ui.large.form
+        .field
+            label 
+                if icon
+                    // i.icon(class=field_value)
+                    +icon name=icon cl='ui avatar image'
+                if title
+                    |#{title}
+                else if label
+                    |#{label}
+                //- else if key
+                //-     |#{key}
+                //- else
+                //-     |#{this}
+            textarea.edit_textarea(rows='7') #{field_value}

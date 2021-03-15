@@ -1,0 +1,42 @@
+template(name='number_edit')
+    .ui.inline.small.header(title=tip)
+        if icon
+            i.icon(class=icon)
+            // +icon name=icon cl='ui avatar image'
+        if title
+            |#{title}
+        else if label
+            |#{label}
+        else
+            |#{key}
+    .ui.input            
+        input.edit_number(type='number' min='18' max='100' placeholder=placeholder autocomplete="off")
+        
+        
+        
+
+template(name='image_edit')
+    .ui.form
+        if icon
+            i.icon(class=icon)
+        .ui.inline.header
+            if title
+                |#{title}
+            else if label
+                |#{label}
+            else if key
+                |#{key}
+            else
+                |#{this}            
+        .field
+            if field_value
+                //- label Image
+                a(href="{{c.url field_value }}" target='_window')
+                    img.ui.centered.fluid.rounded.image(src="{{c.url field_value height=500 gravity='face' crop='fill'}}" class=currentUser.invert_class)
+                a#remove_photo.ui.right.corner.link.label
+                    i.remove.link.icon
+                // .ui.button.call_cloud_visual
+                //     i.dna.icon
+                //     |autotag
+            else
+                input(type='file' name='upload_image' accept='image/*' )        

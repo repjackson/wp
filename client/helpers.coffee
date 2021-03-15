@@ -1,4 +1,7 @@
 
+Template.registerHelper 'is_current_user', () ->
+    Meteor.user().username is Router.current().params.username
+
 Template.registerHelper 'emotion_selector_class', () ->
     # console.log @
     if @title is 'anger'
@@ -224,6 +227,7 @@ Template.registerHelper 'to_percent', (number)->
 
 Template.registerHelper 'loading_class', ()->
     if Session.get 'loading' then 'disabled' else ''
+Template.registerHelper 'when', ()-> moment(@_timestamp).fromNow()
 
 Template.registerHelper 'publish_when', ()->
     if @watson
