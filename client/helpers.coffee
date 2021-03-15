@@ -107,6 +107,10 @@ Template.registerHelper 'is_video', () ->
     # true
 
 
+Template.registerHelper 'author', () ->
+    Meteor.users.findOne 
+        _id:@_author_id
+    
 Template.registerHelper 'above_50', (input) ->
     # console.log 'input', input
     # console.log @

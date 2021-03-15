@@ -19,9 +19,17 @@ if Meteor.isClient
         'click .mark_viewed': ->
             console.log @
 
-
+    Template.recent_checkin.onCreated ->
+        @autorun => Meteor.subscribe 'author_from_id', @data._id
+        
 if Meteor.isServer
     Meteor.publish 'recent_checkins', ->
         Docs.find 
             model:'checkin'
-        , limit:20
+        , limit:20    
+        
+    Meteor.publish 'author_from_id', (doc_id)->
+        doc = Docs.findOne doc_id
+        
+        Meteor.users.find 
+            _id:doc._author_id
