@@ -1,13 +1,18 @@
 if Meteor.isClient
     Router.route '/', (->
         @layout 'layout'
-        @render 'home'
-        ), name:'home'
+        @render 'map'
+        ), name:'map'
+
+    Router.route '/profile', (->
+        @layout 'layout'
+        @render 'profile'
+        ), name:'profile'
 
 
 Router.configure
     layoutTemplate: 'layout'
-    notFoundTemplate: 'home'
+    notFoundTemplate: 'map'
     loadingTemplate: 'splash'
     trackPageView: false
 
@@ -17,16 +22,16 @@ force_loggedin =  ()->
     else
         @next()
 
-# Router.onBeforeAction(force_loggedin, {
-#     # only: ['admin']
-#     except: [
-#         'home'
-#         'register'
-#         'login'
-#         'verify-email'
-#     ]
-#     })
+Router.onBeforeAction(force_loggedin, {
+    # only: ['admin']
+    except: [
+        'home'
+        'register'
+        'login'
+        'verify-email'
+    ]
+    })
 
 
 
-Router.route '*', -> @render 'home'
+Router.route '*', -> @render 'map'
