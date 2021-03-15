@@ -1,8 +1,17 @@
+template(name='nav')
+    .ui.fluid.attached.borderless.inverted.teal.three.item.menu
+        // a.icon.item.toggle_sidebar.no_blink
+        //     i.bars.icon
+    
+        a.icon.item.blink.clear(href="/" class="{{isActiveRoute regex='home'}}")
+            i.clock.large.icon
+        a.icon.item.blink.clear(href="/map" class="{{isActiveRoute 'people'}}")
+            i.marker.large.icon
+        a.icon.item.blink.clear(href="/user/#{currentUser.username}" class="{{isActiveRoute regex='home'}}")
+            i.user.large.icon
+
+
 template(name='map')
-    unless currentUser
-        +login
-    +location
-template(name='location')        
     #mapid
     .ui.header pos #{pos}
     .ui.list
@@ -18,25 +27,3 @@ template(name='location')
     .ui.header lat #{lat}
     .ui.header lon #{lon}
             
-template(name='search_term')
-    button.ui.big.compact.button.select_query
-        if term.image
-            //- button.ui.compact.circular.button(tabindex="0" title=count)
-            //- img.ui.mini.inline.image(src=term.image)
-            img.ui.mini.inline.image(src=term.image)
-        |#{title}
-                    
-                    
-template(name='agg_tag')
-    button.ui.tertiary.large.circular.button.result(tabindex="0" title=count)
-        if term.image
-            //- button.ui.compact.circular.button(tabindex="0" title=count)
-            //- img.ui.mini.inline.image(src=term.image)
-            img.ui.mini.inline.image(src=term.image)
-            .ui.inline.small.thin.header(class=tag_result_class) #{title}
-        else
-            //- button.ui.compact.circular.button(tabindex="0" title=count)
-            .ui.inline.small.thin.header(class=tag_result_class) #{title}
-
-        //- small #{count}
-                    
