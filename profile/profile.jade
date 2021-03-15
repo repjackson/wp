@@ -4,10 +4,10 @@ template(name='profile')
             .sixteen.wide.column
                 span.mobile.only
                     a(href="/u/#{username}/")
-                        img.ui.centered.tiny.inline.spaced.rounded.image.zoomer.boop(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}")
+                        img.ui.centered.tiny.inline.spaced.circular.image.zoomer.boop(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}")
                 span.mobile.hidden
                     a(href="/u/#{username}/")
-                        img.ui.centered.fluid.rounded.image.zoomer.boop(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}") 
+                        img.ui.centered.medium.circular.image.zoomer.boop(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}") 
                 a.ui.header.refresh_user_stats(href="/u/#{username}") 
                     |#{name}
                 // div
@@ -110,7 +110,7 @@ template(name='user_posts')
                     if image_link
                         +image_link_view key='image_link' direct=true
                     if image_id
-                        img.ui.fluid.rounded.image.no_left(src="{{c.url image_id }}" class=currentUser.invert_class)
+                        img.ui.circular.image.no_left(src="{{c.url image_id }}" class=currentUser.invert_class)
                     if youtube_id
                         .no_left
                             +youtube_view key='youtube_id' label='youtube id' direct=true
