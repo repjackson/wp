@@ -1,10 +1,10 @@
 template(name='nav')
     .ui.fluid.attached.borderless.inverted.teal.three.item.menu
-        a.icon.item.blink.clear(href="/recently" class="{{isActiveRoute regex='recently'}}")
+        a.icon.item(href="/recently" class="{{isActiveRoute regex='recently'}}")
             i.clock.large.icon
-        a.icon.item.blink.clear(href="/map" class="{{isActiveRoute 'map'}}")
+        a.icon.item(href="/map" class="{{isActiveRoute 'map'}}")
             i.marker.large.icon
-        a.icon.item.blink.clear(href="/user/#{currentUser.username}" class="{{isActiveRoute regex='profile'}}")
+        a.icon.item(href="/user/#{currentUser.username}" class="{{isActiveRoute regex='profile'}}")
             i.user.large.icon
 
 

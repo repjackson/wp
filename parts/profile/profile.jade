@@ -46,10 +46,32 @@ template(name='profile')
                         .eight.wide.column
                             +array_edit key='tags' label='tags' direct=true
                     .ui.header latest checkins
-                    each user_checkins
-                        .ui.header #{location_ob}
-                        |#{when}
-
+                    .ui.selection.list
+                        each user_checkins
+                            .item #{location_ob}
+                            |#{when}
+                    .ui.header socials
+                    .ui.five.column.grid
+                        .column
+                            i.big.youtube.red.icon
+                        .column
+                        .column
+                        .column
+                        .column
+                            
+                        .column
+                            i.big.instagram.red.icon
+                        .column
+                        .column
+                        .column
+                        .column
+                        .column
+                            i.big.facebook.blue.icon
+                        .column
+                        .column
+                        .column
+                        .column
+                        .column
 
 template(name='user_follow_button')
     unless is_current_user

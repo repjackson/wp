@@ -24,9 +24,8 @@ Meteor.publish 'doc', (doc_id)->
     Docs.find
         _id:doc_id
 
-Meteor.publish 'term', (title)->
-    Terms.find
-        title:title
+Meteor.publish 'me', (title)->
+    Meteor.users.find Meteor.userId()
 
 Meteor.publish 'terms', (selected_tags, searching, query)->
     # console.log 'selected tags looking for terms', selected_tags

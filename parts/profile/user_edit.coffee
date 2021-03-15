@@ -18,6 +18,7 @@ if Meteor.isClient
 
     Template.user_edit_layout.onCreated ->
         @autorun -> Meteor.subscribe 'user_from_username', Router.current().params.username
+        @autorun -> Meteor.subscribe 'me', Router.current().params.username
         # @autorun -> Meteor.subscribe 'user_from_id', Router.current().params.user_id
 
     Template.user_edit_layout.onRendered ->
