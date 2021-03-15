@@ -4,11 +4,6 @@ if Meteor.isClient
         @render 'map'
         ), name:'map'
 
-    Router.route '/profile', (->
-        @layout 'layout'
-        @render 'profile'
-        ), name:'profile'
-
 
 Router.configure
     layoutTemplate: 'layout'

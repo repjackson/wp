@@ -1,12 +1,8 @@
 if Meteor.isClient
-    Router.route '/u/:username', (->
-        @layout 'layout'
-        @render 'user_dashboard'
-        ), name:'user_dashboard'
     Router.route '/user/:username', (->
         @layout 'layout'
-        @render 'user_dashboard'
-        ), name:'user_dashboard_long'
+        @render 'profile'
+        ), name:'profile'
 
    
    
@@ -16,8 +12,8 @@ if Meteor.isClient
         @autorun -> Meteor.subscribe 'user_post_count', Router.current().params.username
         @autorun -> Meteor.subscribe 'user_comment_count', Router.current().params.username
   
-    Template.user_dashboard.onCreated ->
-    Template.user_dashboard.events
+    Template.profile.onCreated ->
+    Template.profile.events
         'click .mark_viewed': ->
             console.log @
             $('body').toast({
@@ -49,7 +45,7 @@ if Meteor.isClient
                 val = $('.add_feed_item').val('')
 
             
-    Template.user_dashboard.helpers
+    Template.profile.helpers
         feed_items: -> 
             Docs.find {
                 model:'feed_item'
@@ -84,11 +80,6 @@ if Meteor.isClient
         #         .popup()
         # , 1000
         user = Meteor.users.findOne(username:Router.current().params.username)
-        Meteor.setTimeout ->
-            if user
-                Meteor.call 'calc_user_stats', user._id, ->
-                Meteor.call 'log_user_view', user._id, ->
-        , 2000
 
 
     Template.profile.helpers

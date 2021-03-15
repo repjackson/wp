@@ -32,6 +32,8 @@ modules@0.16.0
 http
 markdown
 francocatena:status
+lepozepo:cloudinary
+tmeasday:publish-counts
 
 reactive-var@1.0.11
 constellation:console

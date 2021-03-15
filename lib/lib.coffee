@@ -6,30 +6,18 @@
 # @Domain_results = new Meteor.Collection 'domain_results'
 # @Emotion_results = new Meteor.Collection 'emotion_results'
 
-Meteor.methods
-    upvote_sentence: (doc_id, sentence)->
-        console.log sentence
-        Docs.update(
-            { _id:doc_id, "tone.result.sentences_tone.sentence_id": sentence.sentence_id },
-            { $inc: { "tone.result.sentences_tone.$.weight": 1 } }
-        )
+if Meteor.isClient
+    # console.log $
+    $.cloudinary.config
+        cloud_name:"facet"
 
-    reset_sentence: (doc_id, sentence)->
-        console.log sentence
-        Docs.update(
-            { _id:doc_id, "tone.result.sentences_tone.sentence_id": sentence.sentence_id },
-            { $set: { "tone.result.sentences_tone.$.weight": -2 } }
-        )
-
-
-    downvote_sentence: (doc_id, sentence)->
-        console.log sentence
-        Docs.update(
-            { _id:doc_id, "tone.result.sentences_tone.sentence_id": sentence.sentence_id },
-            { $inc: { "tone.result.sentences_tone.$.weight": -1 } }
-        )
-
-
+if Meteor.isServer
+    # console.log Meteor.settings.private.cloudinary_key
+    # console.log Meteor.settings.private.cloudinary_secret
+    Cloudinary.config
+        cloud_name: 'facet'
+        api_key: Meteor.settings.private.cloudinary_key
+        api_secret: Meteor.settings.private.cloudinary_secret
 
 
 Docs.before.insert (userId, doc)->

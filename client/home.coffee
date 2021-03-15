@@ -8,26 +8,14 @@
     #     Session.set('lon', position.coords.longitude)
     # , 5000);
 
-Template.location.helpers
+Template.map.helpers
     pos:-> 
-        console.log Geolocation.currentLocation()
+        # console.log Geolocation.currentLocation()
         Geolocation.currentLocation()
     # lat: ()-> Geolocation.latLng().lat
     # lon: ()-> Geolocation.latLng().lon
 
 
-
-Template.admin.helpers
-    doc_count: ->
-        Docs.find().count()
-
-
-Template.agg_tag.onCreated ->
-    # console.log @
-    # @autorun => @subscribe 'term', @data.title
-# Template.search_term.onCreated ->
-#     # console.log @
-#     @autorun => @subscribe 'term', @data.title
 
 Template.map.onRendered ->
     map = L.map('mapid').setView([51.505, -0.09], 13);
@@ -44,7 +32,11 @@ Template.map.onRendered ->
     }).addTo(map);
     
     L.marker([51.5, -0.09]).addTo(map)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        .bindPopup('person')
+        .openPopup();
+
+    L.marker([53.5, -0.1]).addTo(map)
+        .bindPopup('person')
         .openPopup();
 
 
