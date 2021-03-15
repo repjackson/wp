@@ -6,7 +6,7 @@
 
 
 
-Meteor.setInterval ()->
+# Meteor.setInterval ()->
     # navigator.geolocation.getCurrentPosition((position)->
     #     Session.set('lat', position.coords.latitude)
     #     Session.set('lon', position.coords.longitude)
@@ -28,10 +28,22 @@ Template.admin.helpers
 
 Template.agg_tag.onCreated ->
     # console.log @
-    @autorun => @subscribe 'term', @data.title
+    # @autorun => @subscribe 'term', @data.title
 # Template.search_term.onCreated ->
 #     # console.log @
 #     @autorun => @subscribe 'term', @data.title
+
+Template.location.onRendered ->
+    mymap = L.map('mapid').setView([51.505, -0.09], 13);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'your.mapbox.access.token'
+    }).addTo(mymap);
+
 
 Template.home.onCreated ->
     Session.setDefault('current_query', '')
@@ -74,28 +86,28 @@ Template.search_term.helpers
         # console.log @
         Terms.findOne
             title:@title
-Template.agg_tag.helpers
-    term: ->
-        # console.log @
-        Terms.findOne
-            title:@title
-    tag_result_class: ->
-        # console.log 'active_term class', @
-        term =
-            Terms.findOne title:@title
-        if term
-            # console.log 'found term emotion', term
-            if term.max_emotion_name
-                if term.max_emotion_name is 'anger'
-                    'red invert circular'
-                else if term.max_emotion_name is 'sadness'
-                    'blue invert circular'
-                else if term.max_emotion_name is 'joy'
-                    'green invert circular'
-                else if term.max_emotion_name is 'disgust'
-                    'orange invert circular'
-                else if term.max_emotion_name is 'fear'
-                    'grey invert circular'
+# Template.agg_tag.helpers
+#     term: ->
+#         # console.log @
+#         Terms.findOne
+#             title:@title
+#     tag_result_class: ->
+#         # console.log 'active_term class', @
+#         term =
+#             Terms.findOne title:@title
+#         if term
+#             # console.log 'found term emotion', term
+#             if term.max_emotion_name
+#                 if term.max_emotion_name is 'anger'
+#                     'red invert circular'
+#                 else if term.max_emotion_name is 'sadness'
+#                     'blue invert circular'
+#                 else if term.max_emotion_name is 'joy'
+#                     'green invert circular'
+#                 else if term.max_emotion_name is 'disgust'
+#                     'orange invert circular'
+#                 else if term.max_emotion_name is 'fear'
+#                     'grey invert circular'
 
 
 Template.agg_tag.events
