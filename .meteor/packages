@@ -6,10 +6,12 @@
 
 meteor-base@1.4.0             # Packages every Meteor app needs to have
 iron:router@=1.0.13
-mongo@1.10.0                   # The database Meteor supports right now
+mongo@1.10.1                   # The database Meteor supports right now
 session@1.2.0                 # Client-side reactive dictionary for your app
 tracker@1.2.0                 # Meteor's client-side reactive programming library
-accounts-base@1.6.0
+zimme:active-route
+accounts-base@1.8.0
+accounts-password@1.7.0
 
 
 random@1.2.0
@@ -25,10 +27,12 @@ mquandalle:jade
 underscore@1.0.10
 coffeescript
 fourseven:scss
-ecmascript@0.14.3
-modules@0.15.0
+ecmascript@0.15.0
+modules@0.16.0
 http
 markdown
+francocatena:status
+
 reactive-var@1.0.11
 constellation:console
 constellation:subscriptions
