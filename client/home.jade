@@ -32,18 +32,6 @@ template(name='map')
                                 if age
                                     |#{age}
                             // |!{about}
-            if is_admin
-                .ui.list
-                    with pos.coords
-                        .item accuracy #{accuracy}
-                        .item altitude #{altitude}
-                        .item altitudeAccuracy #{altitudeAccuracy}
-                        .item heading #{heading}
-                        .item latitude #{latitude}
-                        .item longitude #{longitude}
-                        .item speed #{speed}
-                        .item timestamp #{timestamp}
-                    
             
             
 template(name='text_edit')

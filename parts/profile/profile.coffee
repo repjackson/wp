@@ -16,7 +16,35 @@ if Meteor.isClient
         @autorun -> Meteor.subscribe 'user_live_posts', Router.current().params.username
   
     Template.profile.events
-    
+        'click .refresh_position': ->
+            pos = Geolocation.currentLocation()
+            if pos
+                console.log pos
+                console.log typeof pos
+                Meteor.users.update Meteor.userId(),
+                    $set:
+                        current_position: pos.coords
+                    , (err,res)->
+                        console.log res
+            # if navigator.geolocation
+            #     pos = navigator.geolocation.getCurrentPosition()
+            #     console.log pos
+                # Meteor.users.update Meteor.userId(),
+                #     $set:
+                #         current_position: pos.coords
+                #     , (err,res)->
+                #         console.log res
+            navigator.geolocation.getCurrentPosition (position) =>
+                Meteor.users.update Meteor.userId(),
+                    $set:
+                        current_lat: position.coords.latitude
+                        current_long: position.coords.longitude
+                    , (err,res)->
+                        console.log res
+                
+                console.log(position.coords.latitude, position.coords.longitude);
+                        
+                        
         'click a.select_term': ->
             $('.profile_yield')
                 .transition('fade out', 200)

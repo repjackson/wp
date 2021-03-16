@@ -45,6 +45,23 @@ template(name='profile')
                             +textarea_edit key='about' label='about' direct=true
                         .eight.wide.column
                             +array_edit key='tags' label='tags' direct=true
+                    if is_current_user
+                        .ui.basic.circular.button.refresh_position
+                            |refresh position
+                    .ui.header current lat #{current_lat}                        
+                    .ui.header current long #{current_long}                        
+                        if current_position
+                            .ui.list
+                                with current_position.coords
+                                    .item accuracy #{accuracy}
+                                    .item altitude #{altitude}
+                                    .item altitudeAccuracy #{altitudeAccuracy}
+                                    .item heading #{heading}
+                                    .item latitude #{latitude}
+                                    .item longitude #{longitude}
+                                    .item speed #{speed}
+                                    .item timestamp #{timestamp}
+                        
                     // .ui.header latest checkins
                     // .ui.selection.list
                     //     each user_checkins

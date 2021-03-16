@@ -10,7 +10,7 @@ Docs.allow
         #     user_id is doc._author_id
 Meteor.users.allow
     insert: (user_id, doc) -> true
-    update: (user_id, doc) -> true
+    update: (user_id, doc) -> user_id
     # user_id is doc._author_id
     remove: (user_id, doc) -> false
         # user = Meteor.users.findOne user_id
@@ -32,11 +32,6 @@ Meteor.publish 'current_user', (username)->
     # console.log 'looking for tags', Tags.find().fetch()
     Meteor.users.find
         username:username
-
-
-Meteor.publish 'nearby_people', ()->
-    Meteor.users.find {},
-        limit:10
 
 
 
