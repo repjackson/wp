@@ -3,17 +3,14 @@ template(name='profile')
         .ui.stackable.padded.grid
             if is_current_user
                 .centered.row
-                    .eight.wide.column
-                        if currentUser.light_mode
-                            a.ui.header.visible Visible Profile
-                        else
-                            a.ui.header.anonymous Invisible Profile
-                        
-                    .four.wide.center.aligned.column
-                        if currentUser.light_mode
-                            i.big.eye.link.icon.visible
-                        else
-                            i.big.eye.slash.link.icon.anonymous
+                    if currentUser.light_mode
+                        .ui.basic.fluid.button.visible
+                            i.big.eye.link.icon
+                            | Visible Profile
+                    else
+                        .ui.basic.fluid.button.anonymous
+                            i.big.eye.slash.link.icon
+                            | Invisible Profile
             .row
                 .sixteen.wide.center.aligned.column
                     img.ui.centered.medium.circular.spaced.image.zoomer(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=light_mode_class)

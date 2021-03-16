@@ -7,14 +7,15 @@ if Meteor.isClient
 
     Template.recently.onCreated ->
         @autorun -> Meteor.subscribe 'current_user', Router.current().params.username
-        @autorun -> Meteor.subscribe 'user_post_count', Router.current().params.username
-        @autorun -> Meteor.subscribe 'user_comment_count', Router.current().params.username
+        # @autorun -> Meteor.subscribe 'user_post_count', Router.current().params.username
+        # @autorun -> Meteor.subscribe 'user_comment_count', Router.current().params.username
         @autorun -> Meteor.subscribe 'recent_posts'
   
     Template.recently.helpers
         recent_posts: ->
-            Docs.find
+            Docs.find {
                 model:'live_post'
+            }, sort:_timestamp:-1
     Template.recently.events
         'keyup .add_live_post': (e,t)->
             if e.which is 13

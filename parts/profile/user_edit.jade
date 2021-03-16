@@ -13,17 +13,20 @@ template(name='user_edit_layout')
                             img.ui.centered.medium.rounded.image(src="{{c.url profile_image_id height=400 width=400 gravity='face' crop='fill'}}")
                                 
                             a.ui.green.big.button(href="/user/#{current_user.username}/") 
-                                i.checkmark.big.icon
+                                i.checkmark.large.icon
                                 strong save
-                            a.ui.basic.button(href="/user/#{current_user.username}/edit/account" class="{{isActiveRoute 'user_edit_account'}}" title='account') 
+                            a.ui.basic.large.button(href="/user/#{current_user.username}/edit/account" class="{{isActiveRoute 'user_edit_account'}}" title='account') 
                                 i.cog.icon 
                                 |account
-                            a.ui.basic.button(href="/user/#{current_user.username}/edit/alerts" class="{{isActiveRoute 'user_edit_alerts'}}") 
+                            a.ui.basic.large.button(href="/user/#{current_user.username}/edit/alerts" class="{{isActiveRoute 'user_edit_alerts'}}") 
                                 i.bell.icon 
                                 |alerts
-                            a.ui.basic.button(href="/user/#{current_user.username}/edit/privacy" class="{{isActiveRoute 'user_edit_privacy'}}") 
-                                i.lock.privacy.icon 
+                            a.ui.basic.large.button(href="/user/#{current_user.username}/edit/privacy" class="{{isActiveRoute 'user_edit_privacy'}}") 
+                                i.lock.icon 
                                 | privacy
+                            a.ui.basic.large.button(href="/user/#{current_user.username}/edit/organizations" class="{{isActiveRoute 'user_edit_organization'}}") 
+                                i.users.circle.icon 
+                                | organizations
                         .twelve.wide.column
                             +yield
 

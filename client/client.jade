@@ -7,7 +7,7 @@ head
 
     meta(name="msapplication-TileColor" content="#da532c")
     meta(name="theme-color" content="black")
-    // link(href="https://fonts.googleapis.com/css?family=Ubuntu:300,400&display=swap" rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css?family=Ubuntu:300,400&display=swap" rel="stylesheet")
     link(rel="manifest" href="/manifest.json")
     //- script(src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js")
     //- script(src="https://semantic-ui.com/javascript/library/tablesort.js")
@@ -36,7 +36,8 @@ head
         gtag('config', 'UA-156965333-1');
 
 template(name='layout')
-    div.main_content.scrolling(style="background-image:url('https://freedesignfile.com/upload/2017/01/Colorful-blurred-background-with-halation-effect-vector-04.jpg'); background-repeat: no-repeat;  background-size: cover;" class=light_mode_class)    
+    // div.main_content.scrolling(style="background-image:url('https://freedesignfile.com/upload/2017/01/Colorful-blurred-background-with-halation-effect-vector-04.jpg'); background-repeat: no-repeat;  background-size: cover;" class=light_mode_class)    
+    div.main_content.scrolling(style="background-image:url('https://getflywheel.com/wp-content/uploads/2015/08/free-blurred-backgrounds.jpg'); background-repeat: no-repeat;  background-size: cover;" class=light_mode_class)    
         // div.main_content(style="background-image:url('https://freedesignfile.com/upload/2017/01/Colorful-blurred-background-with-halation-effect-vector-06.jpg'); background-repeat: no-repeat;  background-size: cover;")    
         +nav
         +yield
