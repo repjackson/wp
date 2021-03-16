@@ -23,7 +23,7 @@ Template.body.events
 
 
 Template.map.onCreated ->
-    @autorun => Meteor.subscribe 'nearby_people', parseInt(Session.get('current_long')),parseInt(Session.get('current_lat'))
+    @autorun => Meteor.subscribe 'nearby_people', Meteor.user().username
 
 Template.map.onRendered =>
     Meteor.setTimeout =>

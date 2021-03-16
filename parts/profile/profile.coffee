@@ -11,21 +11,22 @@ if Meteor.isClient
     
     Template.profile.onCreated ->
         @autorun -> Meteor.subscribe 'current_user', Router.current().params.username
-        @autorun -> Meteor.subscribe 'user_post_count', Router.current().params.username
+        # @autorun -> Meteor.subscribe 'user_post_count', Router.current().params.username
         @autorun -> Meteor.subscribe 'user_checkins', Router.current().params.username
         @autorun -> Meteor.subscribe 'user_live_posts', Router.current().params.username
-  
+        @autorun => Meteor.subscribe 'nearby_people', Router.current().params.username
+
     Template.profile.events
         'click .refresh_position': ->
             pos = Geolocation.currentLocation()
-            if pos
-                console.log pos
-                console.log typeof pos
-                Meteor.users.update Meteor.userId(),
-                    $set:
-                        current_position: pos.coords
-                    , (err,res)->
-                        console.log res
+            # if pos
+            #     console.log pos
+            #     console.log typeof pos
+            #     Meteor.users.update Meteor.userId(),
+            #         $set:
+            #             current_position: pos.coords
+            #         , (err,res)->
+            #             console.log res
             # if navigator.geolocation
             #     pos = navigator.geolocation.getCurrentPosition()
             #     console.log pos
@@ -36,12 +37,21 @@ if Meteor.isClient
                 #         console.log res
             user = Meteor.users.findOne()
             navigator.geolocation.getCurrentPosition (position) =>
+                console.log 'saving long', position.coords.longitude
+                console.log 'saving lat', position.coords.latitude
                 Meteor.users.update Meteor.userId(),
                     $set:
+                        location:
+                            "type": "Point",
+                            "coordinates": [
+                                position.coords.longitude
+                                position.coords.latitude
+                            ]
                         current_lat: position.coords.latitude
                         current_long: position.coords.longitude
                     , (err,res)->
                         console.log res
+                console.log 'updated user', Meteor.user().current_location
                 Meteor.call 'tag_coordinates', user._id, position.coords.latitude, position.coords.longitude
                 console.log(position.coords.latitude, position.coords.longitude);
                         
@@ -80,15 +90,15 @@ if Meteor.isClient
                 val = $('.add_feed_item').val('')
 
             
-        'click .checkin': (e,t)->
-            target_user = Meteor.users.findOne(username:Router.current().params.username)
+        # 'click .checkin': (e,t)->
+        #     target_user = Meteor.users.findOne(username:Router.current().params.username)
             
             
-            Docs.insert
-                model:'checkin'
-                target_user_id: target_user._id
-                target_user_username: target_user.username
-                location_ob: Geolocation.currentLocation()
+        #     Docs.insert
+        #         model:'checkin'
+        #         target_user_id: target_user._id
+        #         target_user_username: target_user.username
+        #         location_ob: Geolocation.currentLocation()
                 
             
     Template.profile.helpers
@@ -134,18 +144,6 @@ if Meteor.isClient
 
 
 if Meteor.isServer
-    Meteor.publish 'user_tip_count', (username)->
-        user = Meteor.users.findOne username:username
-        match = {
-            model:'tip'
-            _author_id:user._id
-        }
-    
-        # match.tags = $all:picked_tags
-        # if picked_tags.length
-        Counts.publish this, 'user_tip_count', Docs.find(match)
-        return undefined
-    
     Meteor.methods
         log_user_view: (user_id)->
             if Meteor.user()
