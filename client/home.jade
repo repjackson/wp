@@ -1,14 +1,14 @@
 template(name='nav')
-    .ui.fluid.attached.borderless.three.item.menu(style="opacity:25%;")
-        a.icon.item(href="/recently" class="{{isActiveRoute regex='recently'}}")
+    .ui.fluid.attached.borderless.three.item.menu.topped(style="opacity:45% !important;")
+        a.icon.item.zoomer(href="/recently" class="{{isActiveRoute regex='recently'}}")
             i.clock.large.icon
-        a.icon.item(href="/" class="{{isActiveRoute 'map'}}")
+        a.icon.item.zoomer(href="/" class="{{isActiveRoute 'map'}}")
             i.marker.big.icon
         if currentUser
-            a.icon.item(href="/user/#{currentUser.username}" class="{{isActiveRoute regex='profile'}}")
+            a.icon.item.zoomer(href="/user/#{currentUser.username}" class="{{isActiveRoute regex='profile'}}")
                 i.user.large.icon
         else
-            a.icon.item(href="/login" class="{{isActiveRoute regex='login'}}")
+            a.icon.item.zoomer(href="/login" class="{{isActiveRoute regex='login'}}")
                 i.sign.in.large.icon
         
 

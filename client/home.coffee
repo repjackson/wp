@@ -34,7 +34,7 @@ Template.map.onRendered =>
         Session.set('current_long', pos.coords.longitude)
         Meteor.users.update Meteor.userId(),
             $set:current_position:pos
-        map = L.map('mapid').setView([Session.get('current_lat'), Session.get('current_long')], 17);
+        @map = L.map('mapid').setView([Session.get('current_lat'), Session.get('current_long')], 17);
         # L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         #     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         #     maxZoom: 18,
@@ -62,10 +62,10 @@ Template.map.onRendered =>
             fillOpacity: 0.16,
             radius: 200
         }).addTo(map);
-        onMapClick = (e)->
-            alert("You clicked the map at " + e.latlng);
+        # onMapClick = (e)->
+        #     alert("You clicked the map at " + e.latlng);
         
-        map.on('click', onMapClick);
+        # map.on('click', onMapClick);
 
     , 1000
     # pos.coords.latitude
@@ -100,12 +100,22 @@ Template.map.onRendered =>
     #         Session.set('global_subs_ready', false)
 
 
+# Template.nearby_person.onCreated ->
+#     console.log @data
+#     L.marker([51.5, -0.09]).addTo(map)
+#         .bindPopup('person')
+#         .openPopup();
+
+    
+
 Template.map.helpers
     nearby_people: ->
         Meteor.users.find()
 Template.map.events
     'click .goto_user': ->
-        $('.segment').transition('fade out', 250)
+        $('.main_content')
+            .transition('fade out', 500)
+            .transition('fade in', 500)
         
         Router.go "/user/#{@username}"
     
@@ -138,12 +148,12 @@ Template.map.events
         L.marker([51.5, -0.09]).addTo(map)
             .bindPopup('person')
             .openPopup();
-        circle = L.circle([51.508, -0.11], {
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
-            radius:100
-        }).addTo(mymap);
+        # circle = L.circle([51.508, -0.11], {
+        #     color: 'red',
+        #     fillColor: '#f03',
+        #     fillOpacity: 0.5,
+        #     radius:100
+        # }).addTo(mymap);
 
         # L.marker([53.5, -0.1]).addTo(map)
         #     .bindPopup('person')
