@@ -27,9 +27,11 @@ Template.map.onCreated ->
 Template.map.onRendered =>
     Meteor.setTimeout =>
         pos = Geolocation.currentLocation()
-        pos.coords.latitude
+        # pos.coords.latitude
         Session.set('current_lat', pos.coords.latitude)
         Session.set('current_long', pos.coords.longitude)
+        Meteor.users.update Meteor.userId(),
+            $set:current_position:pos
         map = L.map('mapid').setView([Session.get('current_lat'), Session.get('current_long')], 17);
         # L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         #     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -48,6 +50,16 @@ Template.map.onRendered =>
             tileSize: 512,
             zoomOffset: -1,
         }).addTo(map);
+        L.marker([Session.get('current_lat'), Session.get('current_long')]).addTo(map)
+            .bindPopup('you')
+            .openPopup();
+        L.circle([Session.get('current_lat'), Session.get('current_long')], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.25,
+            radius: 200
+        }).addTo(map);
+            
     , 1000
     # pos.coords.latitude
     # pos.coords.longitude
@@ -65,9 +77,6 @@ Template.map.onRendered =>
     #     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     # }).addTo(map);
     
-    # L.marker([51.5, -0.09]).addTo(map)
-    #     .bindPopup('person')
-    #     .openPopup();
 
     # L.marker([53.5, -0.1]).addTo(map)
     #     .bindPopup('person')
@@ -121,7 +130,13 @@ Template.map.events
         L.marker([51.5, -0.09]).addTo(map)
             .bindPopup('person')
             .openPopup();
-    
+        circle = L.circle([51.508, -0.11], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(mymap);
+
         # L.marker([53.5, -0.1]).addTo(map)
         #     .bindPopup('person')
         #     .openPopup();
