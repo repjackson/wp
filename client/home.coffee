@@ -23,7 +23,8 @@ Template.body.events
 
 
 Template.map.onCreated ->
-    @autorun => Meteor.subscribe 'nearby_people', Meteor.user().username
+    if Meteor.user()
+        @autorun => Meteor.subscribe 'nearby_people', Meteor.user().username
 
 Template.map.onRendered =>
     Meteor.setTimeout =>
@@ -45,8 +46,8 @@ Template.map.onRendered =>
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             accessToken:"pk.eyJ1IjoicmVwamFja3NvbiIsImEiOiJja21iN3V5OWgwMGI4Mm5temU0ZHk3bjVsIn0.3nq7qTUAh0up18iIIuOPrQ"
-            maxZoom: 20,
-            minZoom: 17,
+            maxZoom: 21,
+            minZoom: 18,
             id: 'mapbox/streets-v11',
             tileSize: 512,
             zoomOffset: -1,
@@ -59,7 +60,7 @@ Template.map.onRendered =>
             weight: 0
             fillColor: '#3b5998',
             fillOpacity: 0.17,
-            radius: 250
+            radius: 200
         }).addTo(map);
         onMapClick = (e)->
             alert("You clicked the map at " + e.latlng);
@@ -127,8 +128,8 @@ Template.map.events
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             accessToken:"pk.eyJ1IjoicmVwamFja3NvbiIsImEiOiJja21iN3V5OWgwMGI4Mm5temU0ZHk3bjVsIn0.3nq7qTUAh0up18iIIuOPrQ"
-            maxZoom: 20,
-            minZoom: 17,
+            maxZoom: 21,
+            minZoom: 18,
             id: 'mapbox/streets-v11',
             tileSize: 512,
             zoomOffset: -1,
@@ -141,7 +142,7 @@ Template.map.events
             color: 'red',
             fillColor: '#f03',
             fillOpacity: 0.5,
-            radius: 500
+            radius:100
         }).addTo(mymap);
 
         # L.marker([53.5, -0.1]).addTo(map)

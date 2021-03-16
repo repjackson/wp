@@ -87,7 +87,8 @@ Template.registerHelper 'is_gifv', () ->
 Template.registerHelper 'gif_filename', () ->
     @url.slice(0,-1)
     # true
-
+Template.registerHelper 'formatted', () ->
+    "#{@geocoded[0].components.house_number} #{@geocoded[0].components.road}"
 
 Template.registerHelper 'field_value', () ->
     # console.log @

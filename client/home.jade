@@ -31,7 +31,9 @@ template(name='map')
                             a.ui.header(href="/user/#{username}") #{username}
                                 if age
                                     |#{age}
-                            // |!{about}
+                            |!{about} #{formatted}
+                            each tags
+                                .ui.basic.small.label #{this}
             
             
 template(name='text_edit')
