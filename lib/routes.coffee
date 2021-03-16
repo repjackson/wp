@@ -2,7 +2,7 @@ if Meteor.isClient
     Router.route '/', (->
         @layout 'layout'
         @render 'map'
-        ), name:'map'
+        ), name:'home'
 
 
 Router.configure
@@ -24,6 +24,7 @@ Router.onBeforeAction(force_loggedin, {
         'register'
         'login'
         'verify-email'
+        'map'
     ]
     })
 

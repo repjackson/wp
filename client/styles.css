@@ -92,7 +92,7 @@ body {
 }
 
 .rounded {
-    /* border-radius: 5px !important; */
+     border-radius: 20px !important; 
 }
 
 .sadness {
@@ -303,6 +303,19 @@ input {
 	padding: .2em;
 	/*padding-left: 1em;*/
 }
+.hscroll{
+    max-height: 200px !important;
+    /* padding: 5px !important;
+    border-radius: 10px !important;
+    border-width: 1px !important;
+    border-color: grey !important;
+    border-style: solid !important; */
+    overflow-y:hidden;
+    overflow-x:scroll;
+    /* padding-top: .2em; */
+    padding: .2em;
+    /*padding-left: 1em;*/
+}
 .scrolling{
     max-height: 90vh !important;
     /* padding: 5px !important;
@@ -373,9 +386,9 @@ body {
     /* font-family: 'Lato+Mono', sans-serif !important; */
     font-family: 'Ubuntu', sans-serif !important;
 }
-.segment, .input, .header, .button {
+.ui.segment, .input, .header, .button {
   animation: fadein 1s;
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 

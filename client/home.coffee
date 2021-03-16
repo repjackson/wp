@@ -42,12 +42,13 @@ Template.map.onRendered =>
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             accessToken:"pk.eyJ1IjoicmVwamFja3NvbiIsImEiOiJja21iN3V5OWgwMGI4Mm5temU0ZHk3bjVsIn0.3nq7qTUAh0up18iIIuOPrQ"
-            maxZoom: 18,
-            id: 'mapbox/dark-v10',
+            maxZoom: 20,
+            minZoom: 17,
+            id: 'mapbox/streets-v11',
             tileSize: 512,
             zoomOffset: -1,
         }).addTo(map);
-    , 2000
+    , 1000
     # pos.coords.latitude
     # pos.coords.longitude
     # if Session.get('current_lat')
@@ -87,6 +88,11 @@ Template.map.helpers
     nearby_people: ->
         Meteor.users.find()
 Template.map.events
+    'click .goto_user': ->
+        $('.segment').transition('fade out', 250)
+        
+        Router.go "/user/#{@username}"
+    
     'click .refresh': ->
         console.log Geolocation.currentLocation();
         pos = Geolocation.currentLocation()
@@ -105,8 +111,9 @@ Template.map.events
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             accessToken:"pk.eyJ1IjoicmVwamFja3NvbiIsImEiOiJja21iN3V5OWgwMGI4Mm5temU0ZHk3bjVsIn0.3nq7qTUAh0up18iIIuOPrQ"
-            maxZoom: 18,
-            id: 'mapbox/dark-v10',
+            maxZoom: 20,
+            minZoom: 17,
+            id: 'mapbox/streets-v11',
             tileSize: 512,
             zoomOffset: -1,
         }).addTo(map);
