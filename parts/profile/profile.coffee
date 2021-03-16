@@ -17,6 +17,13 @@ if Meteor.isClient
         @autorun => Meteor.subscribe 'nearby_people', Router.current().params.username
 
     Template.profile.events
+        'click .visible': ->
+            Meteor.users.update Meteor.userId(),
+                $set:light_mode:false
+        'click .anonymous': ->
+            Meteor.users.update Meteor.userId(),
+                $set:light_mode:true
+       
         'click .refresh_position': ->
             pos = Geolocation.currentLocation()
             # if pos

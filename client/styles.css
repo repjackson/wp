@@ -47,8 +47,8 @@ body {
     color: grey !important;
 }
 
-.dark_mode {
-    /* filter: invert(.95) !important; */
+.invert {
+     filter: invert(.95) !important; 
     /* background: rgba(250,250,250,.1) !important; */
 
 }
@@ -406,7 +406,7 @@ body {
     /* font-family: 'Lato+Mono', sans-serif !important; */
     font-family: 'Ubuntu', sans-serif !important;
 }
-.ui.segment, .input, .header, .button, .menu {
+.ui.segment, .input, .header, .button, .menu, .item {
   animation: fadein 2s;
   transition: all 2s ease !important; 
   z-index: 100 !important;

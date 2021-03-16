@@ -14,6 +14,11 @@ Template.registerHelper 'emotion_selector_class', () ->
         'orange invert'
     else if @title is 'fear'
         'grey invert'
+Template.registerHelper 'light_mode_class', () ->
+    if Meteor.user() and Meteor.user().light_mode then '' else 'invert'
+Template.registerHelper 'light_mode', () ->
+    Meteor.user() and Meteor.user().light_mode
+
 Template.registerHelper 'sentence_class', () ->
     # console.log @
     if @tones.length
