@@ -1,6 +1,6 @@
 body {
     /* font-family: 'Raleway', sans-serif !important; */
-    font-family: 'Ubuntu', sans-serif !important;
+    /*font-family: 'Ubuntu', sans-serif !important;*/
     /* font-family: 'Lato+Mono', sans-serif !important; */
     /* font-family: 'Lato', sans-serif !important; */
     /* font-size: 110% !important; */
@@ -318,7 +318,7 @@ input {
     /*padding-left: 1em;*/
 }
 .scrolling{
-    max-height: 90vh !important;
+    max-height: 100vh !important;
     /* padding: 5px !important;
     border-radius: 10px !important;
     border-width: 1px !important;
