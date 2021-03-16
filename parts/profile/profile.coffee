@@ -34,6 +34,7 @@ if Meteor.isClient
                 #         current_position: pos.coords
                 #     , (err,res)->
                 #         console.log res
+            user = Meteor.users.findOne()
             navigator.geolocation.getCurrentPosition (position) =>
                 Meteor.users.update Meteor.userId(),
                     $set:
@@ -41,7 +42,7 @@ if Meteor.isClient
                         current_long: position.coords.longitude
                     , (err,res)->
                         console.log res
-                
+                Meteor.call 'tag_coordinates', user._id, position.coords.latitude, position.coords.longitude
                 console.log(position.coords.latitude, position.coords.longitude);
                         
                         
@@ -105,7 +106,10 @@ if Meteor.isClient
             Docs.find
                 model:'checkin'
 
-        
+        long_form: ->
+            @geocoded[0].formatted
+        category: ->
+            @geocoded[0].components._category
         
     Template.profile.onCreated ->
         @autorun -> Meteor.subscribe 'current_user', Router.current().params.username

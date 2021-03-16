@@ -114,6 +114,7 @@ Template.map.events
         # pos.coords.latitude
         Session.set('current_lat', pos.coords.latitude)
         Session.set('current_long', pos.coords.longitude)
+        
         map = L.map('mapid').setView([Session.get('current_lat'), Session.get('current_long')], 17);
         # L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         #     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',

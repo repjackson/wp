@@ -48,6 +48,10 @@ template(name='profile')
                     if is_current_user
                         .ui.basic.circular.button.refresh_position
                             |refresh position
+                    .ui.header geocoded #{geocoded}     
+                    .ui.big.list
+                        .item category: #{category}
+                        .item #{long_form}
                     .ui.header current lat #{current_lat}                        
                     .ui.header current long #{current_long}                        
                         if current_position
