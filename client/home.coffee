@@ -34,7 +34,12 @@ Template.map.onRendered =>
         Session.set('current_long', pos.coords.longitude)
         Meteor.users.update Meteor.userId(),
             $set:current_position:pos
-        @map = L.map('mapid',{dragging:false, zoomControl:false}).setView([Session.get('current_lat'), Session.get('current_long')], 17);
+        @map = L.map('mapid',{
+            dragging:false, 
+            zoomControl:false
+            bounceAtZoomLimits:false
+            touchZoom:false
+            }).setView([Session.get('current_lat'), Session.get('current_long')], 17);
         # L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         #     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         #     maxZoom: 18,
@@ -44,7 +49,7 @@ Template.map.onRendered =>
         #     accessToken: 'your.mapbox.access.token'
         # }).addTo(mymap);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            # attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             accessToken:"pk.eyJ1IjoicmVwamFja3NvbiIsImEiOiJja21iN3V5OWgwMGI4Mm5temU0ZHk3bjVsIn0.3nq7qTUAh0up18iIIuOPrQ"
             maxZoom: 19,
             minZoom: 19,
