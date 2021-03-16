@@ -22,18 +22,22 @@ template(name='map')
             |reload location data
     .ui.one.column.padded.grid
         .column
-            .ui.small.header People Near You
-            .ui.four.column.stackable.padded.grid
+            .ui.center.aligned.header People Near You
+            .ui.four.column.stackable.padded.centered.grid
                 each nearby_people
-                    .column
-                        .ui.segment.rounded.zoomer.pointer.goto_user
-                            img.ui.tiny.circular.image(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}")
-                            a.ui.header(href="/user/#{username}") #{username}
-                                if age
-                                    |#{age}
-                            |!{about} #{formatted}
-                            each tags
-                                .ui.basic.small.label #{this}
+                    +nearby_person
+                    
+                    
+template(name='nearby_person')                    
+    .column
+        .ui.segment.rounded.zoomer.pointer.goto_user
+            img.ui.tiny.circular.inline.image(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}")
+            a.ui.header(href="/user/#{username}") #{username}
+                if age
+                    |#{age}
+            |!{about} #{formatted}
+            each tags
+                .ui.basic.small.label #{this}
             
             
 template(name='text_edit')

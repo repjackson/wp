@@ -59,7 +59,7 @@ Template.map.onRendered =>
             color: 'blue',
             weight: 0
             fillColor: '#3b5998',
-            fillOpacity: 0.17,
+            fillOpacity: 0.16,
             radius: 200
         }).addTo(map);
         onMapClick = (e)->
