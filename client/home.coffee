@@ -54,12 +54,16 @@ Template.map.onRendered =>
             .bindPopup('you')
             .openPopup();
         L.circle([Session.get('current_lat'), Session.get('current_long')], {
-            color: 'red',
+            # color: 'red',
             fillColor: '#f03',
             fillOpacity: 0.25,
             radius: 200
         }).addTo(map);
-            
+        onMapClick = (e)->
+            alert("You clicked the map at " + e.latlng);
+        
+        map.on('click', onMapClick);
+
     , 1000
     # pos.coords.latitude
     # pos.coords.longitude
