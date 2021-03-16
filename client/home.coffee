@@ -34,7 +34,7 @@ Template.map.onRendered =>
         Session.set('current_long', pos.coords.longitude)
         Meteor.users.update Meteor.userId(),
             $set:current_position:pos
-        @map = L.map('mapid').setView([Session.get('current_lat'), Session.get('current_long')], 17);
+        @map = L.map('mapid',{dragging:false, zoomControl:false}).setView([Session.get('current_lat'), Session.get('current_long')], 17);
         # L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         #     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         #     maxZoom: 18,
@@ -46,21 +46,21 @@ Template.map.onRendered =>
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             accessToken:"pk.eyJ1IjoicmVwamFja3NvbiIsImEiOiJja21iN3V5OWgwMGI4Mm5temU0ZHk3bjVsIn0.3nq7qTUAh0up18iIIuOPrQ"
-            maxZoom: 21,
-            minZoom: 18,
+            maxZoom: 19,
+            minZoom: 19,
             id: 'mapbox/streets-v11',
             tileSize: 512,
             zoomOffset: -1,
         }).addTo(map);
         L.marker([Session.get('current_lat'), Session.get('current_long')]).addTo(map)
-            .bindPopup('you')
-            .openPopup();
+            # .openPopup();
+            # .bindPopup('you')
         L.circle([Session.get('current_lat'), Session.get('current_long')], {
             color: 'blue',
             weight: 0
             fillColor: '#3b5998',
             fillOpacity: 0.16,
-            radius: 200
+            radius: 50
         }).addTo(map);
         # onMapClick = (e)->
         #     alert("You clicked the map at " + e.latlng);
@@ -100,11 +100,11 @@ Template.map.onRendered =>
     #         Session.set('global_subs_ready', false)
 
 
-# Template.nearby_person.onCreated ->
-#     console.log @data
-#     L.marker([51.5, -0.09]).addTo(map)
-#         .bindPopup('person')
-#         .openPopup();
+Template.nearby_person.onCreated ->
+    console.log @data
+    # L.marker([51.5, -0.09]).addTo(map)
+    #     .bindPopup('person')
+    #     .openPopup();
 
     
 
