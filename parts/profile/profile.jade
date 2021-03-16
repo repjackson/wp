@@ -65,19 +65,18 @@ template(name='profile')
                     .ui.big.list
                         .item category: #{category}
                         .item #{long_form}
-                    .ui.header current lat #{current_lat}                        
-                    .ui.header current long #{current_long}                        
-                        if current_position
-                            .ui.list
-                                with current_position.coords
-                                    .item accuracy #{accuracy}
-                                    .item altitude #{altitude}
-                                    .item altitudeAccuracy #{altitudeAccuracy}
-                                    .item heading #{heading}
-                                    .item latitude #{latitude}
-                                    .item longitude #{longitude}
-                                    .item speed #{speed}
-                                    .item timestamp #{timestamp}
+                    .ui.inline.small.grey.header(title='lat, long') #{current_lat}, #{current_long}                     
+                    if current_position
+                        .ui.list
+                            with current_position.coords
+                                .item accuracy #{accuracy}
+                                .item altitude #{altitude}
+                                .item altitudeAccuracy #{altitudeAccuracy}
+                                .item heading #{heading}
+                                .item latitude #{latitude}
+                                .item longitude #{longitude}
+                                .item speed #{speed}
+                                .item timestamp #{timestamp}
                         
                     // .ui.header latest checkins
                     // .ui.selection.list

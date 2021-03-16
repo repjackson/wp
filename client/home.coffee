@@ -1,6 +1,14 @@
 @selected_tags = new ReactiveArray []
 
 
+# @onpush = (event)->
+#   console.log(event.data);
+
+# self.registration.showNotification("New mail from Alice", {
+#   actions: [{action: 'archive', title: "Archive"}]
+# });
+
+
 
 # Meteor.setInterval ()->
     # navigator.geolocation.getCurrentPosition((position)->
@@ -203,11 +211,12 @@ Template.image_edit.events
             # Docs.update parent._id,
             #     $unset:"#{@key}":1
             doc = Docs.findOne parent._id
+            user = Meteor.users.findOne parent._id
             if doc
                 Docs.update parent._id,
                     $unset:"#{@key}":1
            else 
-                Meteor.users.update parent._id,
+                Meteor.users.update user._id,
                     $unset:"#{@key}":1
          
             
