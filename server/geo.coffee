@@ -9,3 +9,13 @@ Meteor.methods
 
         # https://api.opencagedata.com/geocode/v1/json?q=24.77701%2C%20121.02189&key=f234c66b8ec44a448f8cb6a883335718&language=en&pretty=1&no_annotations=1
         # https://api.opencagedata.com/geocode/v1/json?q=Dhumbarahi%2C%20Kathmandu&key=f234c66b8ec44a448f8cb6a883335718&language=en&pretty=1&no_annotations=1
+
+
+Meteor.publish 'nearby_people', (lat,long)->
+    Meteor.users.find
+        location:
+            $near:
+                $geometry:
+                    type: "Point"
+                    coordinates: [c.lng, c.lat]
+                    $maxDistance: 30

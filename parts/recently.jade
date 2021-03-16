@@ -1,23 +1,23 @@
 template(name='recently')
     .ui.stackable.padded.grid(style="background-image=url('https://image.freepik.com/free-vector/colorful-blurred-background_1035-3334.jpg')")
-        .sixteen.wide.column
-            .ui.inline.header Recently Near You
-            .ui.input
-                input.add_live_post(type='text' placeholder="Type your live post...")
-        .scrolling
-            each recent_posts
-                +recent_post
+        .centered.row
+            .eight.wide.center.aligned.column
+                .ui.inline.header Recently Near You
+                .ui.input
+                    input.add_live_post(type='text' placeholder="Type your live post...")
+                .scrolling
+                    each recent_posts
+                        +recent_post
+                        .spacer
                 
                 
 template(name='recent_post')                
-    a.ui.padded.grid.zoomer(href="/user/#{author.username}")
-        .four.wide.column
-            img.ui.tiny.circular.image.zoomer(src="{{c.url author.profile_image_id height=500 width=500 gravity='face' crop='fill'}}")
-        .twelve.wide.column
-            .content
-                a.ui.header(href="/user/#{author.username}") #{author.username}, 
-                    if author.age
-                        |#{author.age}
-                |#{when}
-                div
-                |!{content}
+    a(href="/user/#{author.username}")
+        .ui.segment.rounded.zoomer
+            img.ui.tiny.circular.image.inline.zoomer(src="{{c.url author.profile_image_id height=500 width=500 gravity='face' crop='fill'}}")
+            a.ui.header(href="/user/#{author.username}") #{author.username}, 
+                if author.age
+                    |#{author.age}
+            |#{when}
+            div
+            |!{content}

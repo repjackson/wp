@@ -261,7 +261,7 @@ a.title, #title {
 
 .label {
     margin: 2px !important;
-    /* border-radius: 10px !important; */
+    border-radius: 20px !important; 
 }
 
 input {
@@ -270,7 +270,7 @@ input {
 }
 
 ::-webkit-scrollbar {
-  width: 2px !important;
+  width: 0px !important;
   border-radius: 10px !important;
 }
 .wrap_input {
