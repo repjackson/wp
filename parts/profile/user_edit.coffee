@@ -15,6 +15,10 @@ if Meteor.isClient
         @layout 'user_edit_layout'
         @render 'user_edit_account'
         ), name:'user_edit_account'
+    Router.route '/user/:username/edit/networks', (->
+        @layout 'user_edit_layout'
+        @render 'user_edit_networks'
+        ), name:'user_edit_networks'
 
     Template.user_edit_layout.onCreated ->
         @autorun -> Meteor.subscribe 'user_from_username', Router.current().params.username

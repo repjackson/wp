@@ -172,13 +172,14 @@ if Meteor.isServer
         })
     Meteor.publish 'user_checkins', (username)->
         user = Meteor.users.findOne username:username
-        Docs.find({
-            model:'checkin'
-            _author_id:user._id
-        },{
-            limit:20
-            sort: _timestamp:-1
-        })
+        if user
+            Docs.find({
+                model:'checkin'
+                _author_id:user._id
+            },{
+                limit:20
+                sort: _timestamp:-1
+            })
     # Meteor.publish 'current_user', (username)->
     #     Meteor.users.find Meteor.userId()
         

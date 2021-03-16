@@ -30,6 +30,7 @@ Meteor.publish 'me', (title)->
 Meteor.publish 'current_user', (username)->
     # console.log 'selected tags looking for terms', selected_tags
     # console.log 'looking for tags', Tags.find().fetch()
+    console.log 'username', username
     Meteor.users.find
         username:username
 

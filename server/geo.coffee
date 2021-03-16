@@ -28,12 +28,12 @@ Meteor.methods
 Meteor.publish 'nearby_people', (username)->
     user = Meteor.users.findOne username:username
     
-    
-    console.log 'searching for users lat long', user.current_lat, user.current_long
-    Meteor.users.find
-        location:
-            $near:
-                $geometry:
-                    type: "Point"
-                    coordinates: [user.current_long, user.current_lat]
-                    $maxDistance: 2000
+    if user
+        console.log 'searching for users lat long', user.current_lat, user.current_long
+        Meteor.users.find
+            location:
+                $near:
+                    $geometry:
+                        type: "Point"
+                        coordinates: [user.current_long, user.current_lat]
+                        $maxDistance: 2000

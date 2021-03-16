@@ -23,6 +23,18 @@ template(name='profile')
                     a.ui.small.header.refresh_user_stats(href="/user/#{username}") 
                         |@#{username}
                     .ui.label #{profile_views} views
+                    if network_youtube
+                        a.ui.circular.icon.red.button(href="https://www.youtube.com/#{network_youtube}" target="_window" title='visit youtube profile')
+                            i.big.youtube.link.icon
+                    if network_github
+                        a.ui.circular.icon.button(href="https://www.github.com/#{network_github}" target="_window" title='visit github profile')
+                            i.big.github.link.icon
+                    if network_facebook
+                        a.ui.circular.icon.blue.button(href="https://www.facebook.com/#{network_facebook}" target="_window" title='visit github profile')
+                            i.big.facebook.link.icon
+                    if network_instagram
+                        a.ui.circular.icon.red.button(href="https://www.facebook.com/#{network_facebook}" target="_window" title='visit github profile')
+                            i.big.instagram.link.icon
                     unless is_current_user
                         +user_follow_button
     
@@ -87,28 +99,9 @@ template(name='profile')
                     //         .item #{location_ob}
                     //         |#{when}
                     // .ui.header socials
-                    .ui.five.column.grid
-                        .column
-                            i.big.youtube.red.icon
-                        .column
-                        .column
-                        .column
-                        .column
-                            
-                        .column
-                            i.big.instagram.red.icon
-                        .column
-                        .column
-                        .column
-                        .column
-                        .column
-                            i.big.facebook.blue.icon
-                        .column
-                        .column
-                        .column
-                        .column
-                        .column
-
+                        
+                    
+                    
 template(name='user_follow_button')
     unless is_current_user
         if is_following

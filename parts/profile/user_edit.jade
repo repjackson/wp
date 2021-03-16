@@ -27,6 +27,9 @@ template(name='user_edit_layout')
                             a.ui.basic.large.button(href="/user/#{current_user.username}/edit/organizations" class="{{isActiveRoute 'user_edit_organization'}}") 
                                 i.users.circle.icon 
                                 | organizations
+                            a.ui.basic.large.button(href="/user/#{current_user.username}/edit/networks" class="{{isActiveRoute 'user_edit_networks'}}") 
+                                i.share.icon 
+                                | networks
                         .twelve.wide.column
                             +yield
 
@@ -84,6 +87,20 @@ template(name='user_edit_alerts')
         .item invited to event 
         .item invited to shift 
         .item personal request received        
+       
+template(name='user_edit_networks')
+    .ui.header
+        i.share.icon
+        | networks
+    +text_edit key='network_facebook' label='facebook' icon='facebook'
+    +text_edit key='network_instagram' label='instagram' icon='instagram'
+    +text_edit key='network_github' label='github' icon='github'
+    +text_edit key='network_youtube' label='youtube' icon='youtube'
+    +text_edit key='network_facebook' label='facebook' icon='facebook'
+    +text_edit key='network_facebook' label='facebook' icon='facebook'
+    +text_edit key='network_facebook' label='facebook' icon='facebook'
+    +text_edit key='network_facebook' label='facebook' icon='facebook'
+
        
             
 template(name='emails_edit')
