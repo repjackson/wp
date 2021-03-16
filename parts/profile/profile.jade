@@ -1,12 +1,13 @@
 template(name='profile')
     with user
         .ui.stackable.padded.grid
-            .centered.row
-                .eight.wide.column
-                    .ui.header Public Profile
-                    |Your profile details will be public
-                .four.wide.center.aligned.column
-                    i.big.toggle.on.icon
+            if is_current_user
+                .centered.row
+                    .eight.wide.column
+                        .ui.header Public Profile
+                        |Your profile details will be public
+                    .four.wide.center.aligned.column
+                        i.big.toggle.on.icon
             .row
                 .sixteen.wide.center.aligned.column
                     img.ui.centered.medium.circular.spaced.image.zoomer(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}")
@@ -19,7 +20,8 @@ template(name='profile')
                     a.ui.small.header.refresh_user_stats(href="/user/#{username}") 
                         |@#{username}
                     .ui.label #{profile_views} views
-                    +user_follow_button
+                    unless is_current_user
+                        +user_follow_button
     
                     // .ui.big.button.checkin
                     //     |checkin
@@ -36,18 +38,29 @@ template(name='profile')
                             // |log out
                     // if in_dev
                     //     +print_this
-                    .ui.stackable.padded.grid
-                        .eight.wide.column
-                            +text_edit key='name' label='name' direct=true
-                        .eight.wide.column
-                            +number_edit key='age' label='age' direct=true
-                        .eight.wide.column
-                            +textarea_edit key='about' label='about' direct=true
-                        .eight.wide.column
-                            +array_edit key='tags' label='tags' direct=true
                     if is_current_user
-                        .ui.basic.circular.button.refresh_position
-                            |refresh position
+                        .ui.stackable.padded.grid
+                            .eight.wide.column
+                                +text_edit key='name' label='name' direct=true
+                            .eight.wide.column
+                                +number_edit key='age' label='age' direct=true
+                            .eight.wide.column
+                                +textarea_edit key='about' label='about' direct=true
+                            .eight.wide.column
+                                +array_edit key='tags' label='tags' direct=true
+                            .ui.basic.circular.button.refresh_position
+                                |refresh position
+                    else 
+                        .ui.stackable.padded.grid
+                            .eight.wide.column
+                                .ui.header #{name}
+                            .eight.wide.column
+                                .ui.header #{age}
+                            .eight.wide.column
+                                .ui.small.header #{about}
+                            .eight.wide.column
+                                each tags
+                                    .ui.basic.label #{this}
                     .ui.header geocoded #{geocoded}     
                     .ui.big.list
                         .item category: #{category}
