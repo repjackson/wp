@@ -23,7 +23,8 @@ Template.body.events
 
 
 Template.map.onCreated ->
-    @autorun => Meteor.subscribe 'nearby_people'
+    @autorun => Meteor.subscribe 'nearby_people', parseInt(Session.get('current_long')),parseInt(Session.get('current_lat'))
+
 Template.map.onRendered =>
     Meteor.setTimeout =>
         pos = Geolocation.currentLocation()
@@ -54,10 +55,11 @@ Template.map.onRendered =>
             .bindPopup('you')
             .openPopup();
         L.circle([Session.get('current_lat'), Session.get('current_long')], {
-            # color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.25,
-            radius: 200
+            color: 'blue',
+            weight: 0
+            fillColor: '#3b5998',
+            fillOpacity: 0.17,
+            radius: 250
         }).addTo(map);
         onMapClick = (e)->
             alert("You clicked the map at " + e.latlng);

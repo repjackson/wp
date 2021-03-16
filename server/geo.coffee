@@ -17,5 +17,5 @@ Meteor.publish 'nearby_people', (lat,long)->
             $near:
                 $geometry:
                     type: "Point"
-                    coordinates: [c.lng, c.lat]
+                    coordinates: [long, lat]
                     $maxDistance: 30
