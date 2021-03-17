@@ -37,6 +37,11 @@ head
 
 template(name='layout')
     // div.main_content.scrolling(style="background-image:url('https://freedesignfile.com/upload/2017/01/Colorful-blurred-background-with-halation-effect-vector-04.jpg'); background-repeat: no-repeat;  background-size: cover;" class=light_mode_class)    
+    if currentUser.admin_mode
+        .ui.fluid.inverted.attached.menu
+            .icon.item
+                i.home.icon
+                |home
     div.main_content.scrolling(style="background-image:url('https://getflywheel.com/wp-content/uploads/2015/08/free-blurred-backgrounds.jpg'); background-repeat: no-repeat;  background-size: cover;" class=light_mode_class)    
         // div.main_content(style="background-image:url('https://freedesignfile.com/upload/2017/01/Colorful-blurred-background-with-halation-effect-vector-06.jpg'); background-repeat: no-repeat;  background-size: cover;")    
         +nav

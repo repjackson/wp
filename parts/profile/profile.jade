@@ -30,17 +30,20 @@ template(name='profile')
                         a.ui.circular.icon.button(href="https://www.github.com/#{network_github}" target="_window" title='visit github profile')
                             i.big.github.link.icon
                     if network_facebook
-                        a.ui.circular.icon.blue.button(href="https://www.facebook.com/#{network_facebook}" target="_window" title='visit github profile')
+                        a.ui.circular.icon.blue.button(href="https://www.facebook.com/#{network_facebook}" target="_window" title='visit facebook profile')
                             i.big.facebook.link.icon
                     if network_instagram
-                        a.ui.circular.icon.red.button(href="https://www.facebook.com/#{network_facebook}" target="_window" title='visit github profile')
+                        a.ui.circular.icon.red.button(href="https://www.instagram.com/#{network_instagram}" target="_window" title='visit instagram profile')
                             i.big.instagram.link.icon
                     unless is_current_user
                         +user_follow_button
-    
+                    
                     // .ui.big.button.checkin
                     //     |checkin
-                    if is_admin
+                    if is_current_user
+                        if is_admin
+                            +boolean_edit key='admin_mode' label='admin mode'
+                    if currentUser.admin_mode
                         a.ui.icon.button(href="/user/#{username}/edit" title='admin edit account')
                             i.shield.large.icon
                             // |account
@@ -76,6 +79,13 @@ template(name='profile')
                             .eight.wide.column
                                 each tags
                                     .ui.basic.label #{this}
+                    .ui.menu
+                        .item following
+                        .item followed by
+                        .item visit history
+                        .item checkins
+                        .item notifications
+                        .item messages
                     .ui.header geocoded #{geocoded}     
                     .ui.big.list
                         .item category: #{category}
@@ -99,7 +109,6 @@ template(name='profile')
                     //         .item #{location_ob}
                     //         |#{when}
                     // .ui.header socials
-                        
                     
                     
 template(name='user_follow_button')

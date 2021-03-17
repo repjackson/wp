@@ -126,7 +126,8 @@ Template.registerHelper 'is_video', () ->
             true
     # true
 
-
+Template.registerHelper 'is_admin', () ->
+    Meteor.user() and Meteor.userId() in ['vwCi2GTJgvBJN5F6c','6qYmg67C6tZedpWXc']
 Template.registerHelper 'author', () ->
     Meteor.users.findOne 
         _id:@_author_id
