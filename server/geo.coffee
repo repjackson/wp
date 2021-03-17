@@ -31,6 +31,7 @@ Meteor.publish 'nearby_people', (username)->
     if user
         console.log 'searching for users lat long', user.current_lat, user.current_long
         Meteor.users.find
+            light_mode:true
             location:
                 $near:
                     $geometry:

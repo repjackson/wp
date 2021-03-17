@@ -3,4 +3,6 @@ Meteor.publish 'userStatus', ()->
 
 Meteor.publish 'user_from_username', (username)->
     Meteor.users.find username:username
-    
+
+Meteor.publish 'markers', (username)->
+    Markers.find()    

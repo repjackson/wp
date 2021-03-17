@@ -3,6 +3,11 @@ Docs.allow
     update: (user_id, doc) -> true
     # user_id is doc._author_id
     remove: (user_id, doc) -> false
+Markers.allow
+    insert: (user_id, doc) -> true
+    update: (user_id, doc) -> true
+    # user_id is doc._author_id
+    remove: (user_id, doc) -> true
         # user = Meteor.users.findOne user_id
         # if user.roles and 'admin' in user.roles
         #     true

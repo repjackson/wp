@@ -3,10 +3,6 @@ if Meteor.isClient
         @layout 'profile_layout'
         @render 'profile'
         ), name:'profile'
-    Router.route '/user/:username/messages', (->
-        @layout 'profile_layout'
-        @render 'profile_messages'
-        ), name:'profile_messages'
     Router.route '/user/:username/following', (->
         @layout 'profile_layout'
         @render 'profile_following'
@@ -23,10 +19,6 @@ if Meteor.isClient
         @layout 'profile_layout'
         @render 'profile_checkins'
         ), name:'profile_checkins'
-    Router.route '/user/:username/friends', (->
-        @layout 'profile_layout'
-        @render 'profile_friends'
-        ), name:'profile_friends'
     Router.route '/user/:username/notifications', (->
         @layout 'profile_layout'
         @render 'profile_notifications'

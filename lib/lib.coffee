@@ -1,10 +1,5 @@
 @Docs = new Meteor.Collection 'docs'
-# @Tags = new Meteor.Collection 'tags'
-# @Terms = new Meteor.Collection 'terms'
-# @Subreddits = new Meteor.Collection 'subreddits'
-# @Authors = new Meteor.Collection 'authors'
-# @Domain_results = new Meteor.Collection 'domain_results'
-# @Emotion_results = new Meteor.Collection 'emotion_results'
+@Markers = new Meteor.Collection 'markers'
 
 if Meteor.isClient
     # console.log $
