@@ -286,7 +286,7 @@ input {
 
 ::-webkit-scrollbar {
   width: 0px !important;
-  border-radius: 20px !important;
+  height: 0px !important;
 }
 .wrap_input {
     text-align:center !important;
