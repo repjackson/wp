@@ -35,6 +35,21 @@ template(name='profile')
                     if network_instagram
                         a.ui.circular.icon.red.button(href="https://www.instagram.com/#{network_instagram}" target="_window" title='visit instagram profile')
                             i.big.instagram.link.icon
+                    if network_linkedin
+                        a.ui.circular.icon.blue.button(href="https://www.linkedin.com/#{network_linkedin}" target="_window" title='visit linkedin profile')
+                            i.big.linkedin.link.icon
+                    if network_paypal
+                        a.ui.circular.icon.blue.button(href="https://www.paypal.com/#{network_paypal}" target="_window" title='visit paypal profile')
+                            i.big.paypal.link.icon
+                    if network_reddit
+                        a.ui.circular.icon.red.button(href="https://www.reddit.com/r/#{network_reddit}" target="_window" title='visit reddit profile')
+                            i.big.reddit.link.icon
+                    if network_reddit
+                        a.ui.circular.icon.button(href="https://www.medium.com/#{network_medium}" target="_window" title='visit medium profile')
+                            i.big.medium.link.icon
+                    if network_stackexchange
+                        a.ui.circular.icon.blue.button(href="https://www.stackexchange.com/#{network_stackexchange}" target="_window" title='visit stack exchange profile')
+                            i.big.stack.exchange.link.icon
                     unless is_current_user
                         +user_follow_button
                     
