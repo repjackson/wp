@@ -7,7 +7,7 @@ template(name='profile_layout')
         with current_user
             .ui.stackable.padded.grid
                 .centered.row
-                    .sixteen.wide.center.aligned.column
+                    .four.wide.center.aligned.column
                         img.ui.centered.medium.circular.spaced.image.zoomer(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=light_mode_class)
                         div
                         // span.mobile.only
@@ -80,7 +80,8 @@ template(name='profile_layout')
                                 // |log out
                         // if in_dev
                         //     +print_this
-                        .ui.eight.item.stackable.borderless.rounded.menu
+                    .twelve.wide.column
+                        .ui.eight.item.stackable.borderless.rounded.menu.hscroll
                             a.item(href='/user/#{current_user.username}' class="{{isActiveRoute regex='profile'}}")
                                 i.reply.icon
                                 |profile

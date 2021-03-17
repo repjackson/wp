@@ -1,4 +1,4 @@
-@selected_tags = new ReactiveArray []
+# @selected_tags = new ReactiveArray []
 
 
 # @onpush = (event)->
@@ -10,11 +10,6 @@
 
 
 
-# Meteor.setInterval ()->
-    # navigator.geolocation.getCurrentPosition((position)->
-    #     Session.set('lat', position.coords.latitude)
-    #     Session.set('lon', position.coords.longitude)
-    # , 5000);
 
 Template.map.helpers
     pos:-> 
@@ -47,6 +42,7 @@ Template.map.onRendered =>
             zoomControl:false
             bounceAtZoomLimits:false
             touchZoom:false
+            doubleClickZoom:false
             }).setView([Session.get('current_lat'), Session.get('current_long')], 17);
         # L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         #     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -81,6 +77,11 @@ Template.map.onRendered =>
         # map.on('click', onMapClick);
 
     , 1000
+    Meteor.setInterval ()->
+        navigator.geolocation.getCurrentPosition((position)->
+            Session.set('lat', position.coords.latitude)
+            Session.set('lon', position.coords.longitude)
+        , 5000);
     # pos.coords.latitude
     # pos.coords.longitude
     # if Session.get('current_lat')
@@ -103,8 +104,8 @@ Template.map.onRendered =>
     #     .openPopup();
     
 
-    home_subs_ready: ->
-        Template.instance().subscriptionsReady()
+    # home_subs_ready: ->
+    #     Template.instance().subscriptionsReady()
     #
     # home_subs_ready: ->
     #     if Template.instance().subscriptionsReady()
