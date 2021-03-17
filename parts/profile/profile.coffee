@@ -1,22 +1,50 @@
 if Meteor.isClient
     Router.route '/user/:username', (->
-        @layout 'layout'
+        @layout 'profile_layout'
         @render 'profile'
         ), name:'profile'
+    Router.route '/user/:username/messages', (->
+        @layout 'profile_layout'
+        @render 'profile_messages'
+        ), name:'profile_messages'
+    Router.route '/user/:username/following', (->
+        @layout 'profile_layout'
+        @render 'profile_following'
+        ), name:'profile_following'
+    Router.route '/user/:username/followed_by', (->
+        @layout 'profile_layout'
+        @render 'profile_followed_by'
+        ), name:'profile_followed_by'
+    Router.route '/user/:username/history', (->
+        @layout 'profile_layout'
+        @render 'profile_history'
+        ), name:'profile_history'
+    Router.route '/user/:username/checkins', (->
+        @layout 'profile_layout'
+        @render 'profile_checkins'
+        ), name:'profile_checkins'
+    Router.route '/user/:username/friends', (->
+        @layout 'profile_layout'
+        @render 'profile_friends'
+        ), name:'profile_friends'
+    Router.route '/user/:username/notifications', (->
+        @layout 'profile_layout'
+        @render 'profile_notifications'
+        ), name:'profile_notifications'
 
    
    
     Template.layout.onCreated ->
         @autorun -> Meteor.subscribe 'me', ->
     
-    Template.profile.onCreated ->
+    Template.profile_layout.onCreated ->
         @autorun -> Meteor.subscribe 'current_user', Router.current().params.username
         # @autorun -> Meteor.subscribe 'user_post_count', Router.current().params.username
         @autorun -> Meteor.subscribe 'user_checkins', Router.current().params.username
         @autorun -> Meteor.subscribe 'user_live_posts', Router.current().params.username
         @autorun => Meteor.subscribe 'nearby_people', Router.current().params.username
 
-    Template.profile.events
+    Template.profile_layout.events
         'click .visible': ->
             Meteor.users.update Meteor.userId(),
                 $set:light_mode:false
@@ -108,7 +136,7 @@ if Meteor.isClient
         #         location_ob: Geolocation.currentLocation()
                 
             
-    Template.profile.helpers
+    Template.profile_layout.helpers
         live_posts: -> 
             Docs.find {
                 model:'live_post'
@@ -128,22 +156,20 @@ if Meteor.isClient
         category: ->
             @geocoded[0].components._category
         
-    Template.profile.onCreated ->
-        @autorun -> Meteor.subscribe 'current_user', Router.current().params.username
     
     Template.profile.onRendered ->
         # Meteor.setTimeout ->
         #     $('.no_blink')
         #         .popup()
         # , 1000
-        user = Meteor.users.findOne(username:Router.current().params.username)
+        # user = Meteor.users.findOne(username:Router.current().params.username)
 
 
-    Template.profile.helpers
-        route_slug: -> "user_#{@slug}"
+    Template.profile_layout.helpers
+        # route_slug: -> "user_#{@slug}"
         current_user: -> Meteor.users.findOne username:Router.current().params.username
-        user_comment_count: -> Counts.get 'user_comment_count'
-        user_post_count: -> Counts.get 'user_post_count'
+        # user_comment_count: -> Counts.get 'user_comment_count'
+        # user_post_count: -> Counts.get 'user_post_count'
 
 
 

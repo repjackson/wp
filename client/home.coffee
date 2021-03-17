@@ -24,10 +24,10 @@ Template.map.helpers
     # lon: ()-> Geolocation.latLng().lon
 
 Template.body.events
-    'click a': ->
-        $('.main_content')
-            .transition('fade out', 250)
-            .transition('fade in', 250)
+    # 'click a': ->
+    #     $('.main_content')
+    #         .transition('fade out', 250)
+    #         .transition('fade in', 250)
 
 
 Template.map.onCreated ->

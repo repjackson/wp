@@ -1,151 +1,176 @@
-template(name='profile')
-    with current_user
-        .ui.stackable.padded.grid
-            .centered.row
-                .sixteen.wide.center.aligned.column
-                    img.ui.centered.medium.circular.spaced.image.zoomer(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=light_mode_class)
-                    div
-                    span.mobile.only
-                        a(href="/user/#{username}/")
-                    .spacer
-                    a.ui.header.refresh_user_stats(href="/user/#{username}") 
-                        |#{name}
-                    .spacer
-                    if is_current_user
-                        if currentUser.light_mode
-                            .ui.basic.large.icon.button.visible
-                                i.eye.link.big.icon
-                                // | Visible Profile
-                        else
-                            .ui.basic.large.icon.button.anonymous
-                                i.eye.slash.link.big.icon
-                                // | Invisible Profile
-                        if network_youtube
-                            a.ui.circular.icon.red.button(href="https://www.youtube.com/#{network_youtube}" target="_window" title='visit youtube profile')
-                                i.big.youtube.link.icon
-                        if network_twitter
-                            a.ui.circular.icon.blue.button(href="https://www.twitter.com/#{network_twitter}" target="_window" title='visit twitter profile')
-                                i.big.twitter.link.icon
-                        if network_github
-                            a.ui.circular.icon.button(href="https://www.github.com/#{network_github}" target="_window" title='visit github profile')
-                                i.big.github.link.icon
-                        if network_facebook
-                            a.ui.circular.icon.blue.button(href="https://www.facebook.com/#{network_facebook}" target="_window" title='visit facebook profile')
-                                i.big.facebook.link.icon
-                        if network_instagram
-                            a.ui.circular.icon.red.button(href="https://www.instagram.com/#{network_instagram}" target="_window" title='visit instagram profile')
-                                i.big.instagram.link.icon
-                        if network_linkedin
-                            a.ui.circular.icon.blue.button(href="https://www.linkedin.com/#{network_linkedin}" target="_window" title='visit linkedin profile')
-                                i.big.linkedin.link.icon
-                        if network_paypal
-                            a.ui.circular.icon.blue.button(href="https://www.paypal.com/#{network_paypal}" target="_window" title='visit paypal profile')
-                                i.big.paypal.link.icon
-                        if network_reddit
-                            a.ui.circular.icon.red.button(href="https://www.reddit.com/r/#{network_reddit}" target="_window" title='visit reddit profile')
-                                i.big.reddit.link.icon
-                        if network_reddit
-                            a.ui.circular.icon.button(href="https://www.medium.com/#{network_medium}" target="_window" title='visit medium profile')
-                                i.big.medium.link.icon
-                        if network_stackexchange
-                            a.ui.circular.icon.blue.button(href="https://www.stackexchange.com/#{network_stackexchange}" target="_window" title='visit stack exchange profile')
-                                i.big.stack.exchange.link.icon
-        
-                    a.ui.small.header.refresh_user_stats(href="/user/#{username}") 
-                        |@#{username}
-                    .ui.label #{profile_views} views
-                    unless is_current_user
-                        +user_follow_button
-                    
-                    // .ui.big.button.checkin
-                    //     |checkin
-                    if is_current_user
-                        if is_admin
-                            +boolean_edit key='admin_mode' label='admin mode'
-                    if currentUser.admin_mode
-                        a.ui.icon.button(href="/user/#{username}/edit" title='admin edit account')
-                            i.shield.large.icon
-                            // |account
-                    if is_current_user
-                        a.ui.icon.basic.button(href="/user/#{username}/edit" title='edit your account')
-                            i.cog.large.icon
-                            // |account
-                        a.ui.icon.basic.button.logout(href="#" title='log out')
-                            i.sign.out.large.icon
-                            // |log out
-                    // if in_dev
-                    //     +print_this
-                    .ui.eight.item.stackable.borderless.rounded.menu
-                        a.item(href='/user/#{current_user.username}/profile')
-                            i.reply.icon
-                            |profile
-                        a.item(href='/user/#{current_user.username}/profile')
-                            i.reply.icon
-                            |following
-                        a.item(href='/user/#{current_user.username}/followed')
-                            i.undo.icon
-                            |followed by
-                        a.item(href='/user/#{current_user.username}/history')
-                            i.history.icon
-                            | history
-                        a.item(href='/user/#{current_user.username}/checkins')
-                            i.checkmark.icon
-                            |checkins
-                        a.item(href='/user/#{current_user.username}/friends')
-                            i.smile.icon
-                            |friends
-                        a.item(href='/user/#{current_user.username}/notifications')
-                            i.rss.icon
-                            |notifications
-                        a.item(href='/user/#{current_user.username}/messages')
-                            i.envelope.icon
-                            |messages
-                    if is_current_user
-                        .ui.stackable.padded.grid
-                            .eight.wide.column
-                                +text_edit key='name' label='name' direct=true
-                            .eight.wide.column
-                                +number_edit key='age' label='age' direct=true
-                            .eight.wide.column
-                                +textarea_edit key='about' label='about' direct=true
-                            .eight.wide.column
-                                +array_edit key='tags' label='tags' direct=true
-                            .ui.basic.circular.button.refresh_position
-                                |refresh position
-                    else 
-                        .ui.stackable.padded.grid
-                            .eight.wide.column
-                                .ui.header #{name}
-                            .eight.wide.column
-                                .ui.header #{age}
-                            .eight.wide.column
-                                .ui.small.header #{about}
-                            .eight.wide.column
-                                each tags
-                                    .ui.basic.label #{this}
-                    // .ui.header geocoded #{geocoded}     
-                    .ui.big.list
-                        .item location category: #{category}
-                        .item #{long_form}
-                    .ui.inline.small.grey.header(title='lat, long') #{current_lat}, #{current_long}                     
-                    if current_position
-                        .ui.list
-                            with current_position.coords
-                                .item accuracy #{accuracy}
-                                .item altitude #{altitude}
-                                .item altitudeAccuracy #{altitudeAccuracy}
-                                .item heading #{heading}
-                                .item latitude #{latitude}
-                                .item longitude #{longitude}
-                                .item speed #{speed}
-                                .item timestamp #{timestamp}
+template(name='profile_layout')
+    if currentUser.admin_mode
+        +admin_nav
+    div.main_content.scrolling(style="background-image:url('https://getflywheel.com/wp-content/uploads/2015/08/free-blurred-backgrounds.jpg'); background-repeat: no-repeat;  background-size: cover;" class=light_mode_class)    
+        // div.main_content(style="background-image:url('https://freedesignfile.com/upload/2017/01/Colorful-blurred-background-with-halation-effect-vector-06.jpg'); background-repeat: no-repeat;  background-size: cover;")    
+        +nav
+        with current_user
+            .ui.stackable.padded.grid
+                .centered.row
+                    .sixteen.wide.center.aligned.column
+                        img.ui.centered.medium.circular.spaced.image.zoomer(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=light_mode_class)
+                        div
+                        // span.mobile.only
+                        //     a(href="/user/#{username}/")
+                        .spacer
+                        a.ui.header.refresh_user_stats(href="/user/#{username}") 
+                            |#{name}
+                        .spacer
+                        if is_current_user
+                            if currentUser.light_mode
+                                .ui.basic.large.icon.button.visible
+                                    i.eye.link.big.icon
+                                    // | Visible Profile
+                            else
+                                .ui.basic.large.icon.button.anonymous
+                                    i.eye.slash.link.big.icon
+                                    // | Invisible Profile
+                            if network_youtube
+                                a.ui.circular.icon.red.button(href="https://www.youtube.com/#{network_youtube}" target="_window" title='visit youtube profile')
+                                    i.big.youtube.link.icon
+                            if network_twitter
+                                a.ui.circular.icon.blue.button(href="https://www.twitter.com/#{network_twitter}" target="_window" title='visit twitter profile')
+                                    i.big.twitter.link.icon
+                            if network_github
+                                a.ui.circular.icon.button(href="https://www.github.com/#{network_github}" target="_window" title='visit github profile')
+                                    i.big.github.link.icon
+                            if network_facebook
+                                a.ui.circular.icon.blue.button(href="https://www.facebook.com/#{network_facebook}" target="_window" title='visit facebook profile')
+                                    i.big.facebook.link.icon
+                            if network_instagram
+                                a.ui.circular.icon.red.button(href="https://www.instagram.com/#{network_instagram}" target="_window" title='visit instagram profile')
+                                    i.big.instagram.link.icon
+                            if network_linkedin
+                                a.ui.circular.icon.blue.button(href="https://www.linkedin.com/#{network_linkedin}" target="_window" title='visit linkedin profile')
+                                    i.big.linkedin.link.icon
+                            if network_paypal
+                                a.ui.circular.icon.blue.button(href="https://www.paypal.com/#{network_paypal}" target="_window" title='visit paypal profile')
+                                    i.big.paypal.link.icon
+                            if network_reddit
+                                a.ui.circular.icon.red.button(href="https://www.reddit.com/r/#{network_reddit}" target="_window" title='visit reddit profile')
+                                    i.big.reddit.link.icon
+                            if network_reddit
+                                a.ui.circular.icon.button(href="https://www.medium.com/#{network_medium}" target="_window" title='visit medium profile')
+                                    i.big.medium.link.icon
+                            if network_stackexchange
+                                a.ui.circular.icon.blue.button(href="https://www.stackexchange.com/#{network_stackexchange}" target="_window" title='visit stack exchange profile')
+                                    i.big.stack.exchange.link.icon
+            
+                        // a.ui.small.header.refresh_user_stats(href="/user/#{username}") 
+                        //     |@#{username}
+                        .ui.label #{profile_views} views
+                        unless is_current_user
+                            +user_follow_button
                         
-                    // .ui.header latest checkins
-                    // .ui.selection.list
-                    //     each user_checkins
-                    //         .item #{location_ob}
-                    //         |#{when}
-                    // .ui.header socials
+                        // .ui.big.button.checkin
+                        //     |checkin
+                        if is_current_user
+                            if is_admin
+                                +boolean_edit key='admin_mode' label='admin'
+                        if currentUser.admin_mode
+                            a.ui.icon.button(href="/user/#{username}/edit" title='admin edit account')
+                                i.shield.large.icon
+                                // |account
+                        if is_current_user
+                            a.ui.icon.basic.button(href="/user/#{username}/edit" title='edit your account')
+                                i.cog.large.icon
+                                // |account
+                            a.ui.icon.basic.button.logout(href="#" title='log out')
+                                i.sign.out.large.icon
+                                // |log out
+                        // if in_dev
+                        //     +print_this
+                        .ui.eight.item.stackable.borderless.rounded.menu
+                            a.item(href='/user/#{current_user.username}' class="{{isActiveRoute regex='profile'}}")
+                                i.reply.icon
+                                |profile
+                            a.item(href='/user/#{current_user.username}/following' class="{{isActiveRoute regex='user_following'}}")
+                                i.reply.icon
+                                |following
+                            a.item(href='/user/#{current_user.username}/followed_by' class="{{isActiveRoute regex='user_followed_by'}}")
+                                i.undo.icon
+                                |followed by
+                            a.item(href='/user/#{current_user.username}/history' class="{{isActiveRoute regex='user_history'}}")
+                                i.history.icon
+                                | history
+                            a.item(href='/user/#{current_user.username}/checkins' class="{{isActiveRoute regex='user_checkins'}}")
+                                i.checkmark.icon
+                                |checkins
+                            a.item(href='/user/#{current_user.username}/friends' class="{{isActiveRoute regex='user_friends'}}")
+                                i.smile.icon
+                                |friends
+                            a.item(href='/user/#{current_user.username}/notifications' class="{{isActiveRoute regex='user_notifications'}}")
+                                i.rss.icon
+                                |notifications
+                            a.item(href='/user/#{current_user.username}/messages' class="{{isActiveRoute regex='user_messages'}}")
+                                i.envelope.icon
+                                |messages
+                        +yield
+                    
+                    
+template(name='profile_messages')
+    .ui.header messages
+    
+template(name='profile_followed_by')
+    .ui.header followed by
+    
+template(name='profile_following')
+    .ui.header following
+    
+template(name='profile_history')
+    .ui.header history
+    
+    
+    
+    
+    
+template(name='profile')                    
+    if is_current_user
+        .ui.stackable.padded.grid
+            .eight.wide.column
+                +text_edit key='name' label='name' direct=true
+            .eight.wide.column
+                +number_edit key='age' label='age' direct=true
+            .eight.wide.column
+                +textarea_edit key='about' label='about' direct=true
+            .eight.wide.column
+                +array_edit key='tags' label='tags' direct=true
+            .ui.basic.circular.button.refresh_position
+                |refresh position
+    else 
+        .ui.stackable.padded.grid
+            .eight.wide.column
+                .ui.header #{name}
+            .eight.wide.column
+                .ui.header #{age}
+            .eight.wide.column
+                .ui.small.header #{about}
+            .eight.wide.column
+                each tags
+                    .ui.basic.label #{this}
+    // .ui.header geocoded #{geocoded}     
+    .ui.big.list
+        .item location category: #{category}
+        .item #{long_form}
+    .ui.inline.small.grey.header(title='lat, long') #{current_lat}, #{current_long}                     
+    if current_position
+        .ui.list
+            with current_position.coords
+                .item accuracy #{accuracy}
+                .item altitude #{altitude}
+                .item altitudeAccuracy #{altitudeAccuracy}
+                .item heading #{heading}
+                .item latitude #{latitude}
+                .item longitude #{longitude}
+                .item speed #{speed}
+                .item timestamp #{timestamp}
+        
+    // .ui.header latest checkins
+    // .ui.selection.list
+    //     each user_checkins
+    //         .item #{location_ob}
+    //         |#{when}
+    // .ui.header socials
                     
                     
 template(name='user_follow_button')
