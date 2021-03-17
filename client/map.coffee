@@ -19,7 +19,42 @@ Template.map.helpers
     # lon: ()-> Geolocation.latLng().lon
 
 Template.body.events
-    # 'click a': ->
+    'click a': ->
+        navigator.geolocation.getCurrentPosition (position) =>
+            console.log 'saving long', position.coords.longitude
+            console.log 'saving lat', position.coords.latitude
+            user_position_marker = 
+                Markers.findOne
+                    _author_id: Meteor.userId()
+                    model:'user_marker'
+            unless user_position_marker
+                Markers.insert 
+                    model:'user_marker'
+                    _author_id: Meteor.userId()
+                    latlng:
+                        lat:position.coords.latitude
+                        long:position.coords.longitude
+            if user_position_marker
+                Markers.update user_position_marker,
+                    $set:
+                        latlng:
+                            lat:position.coords.latitude
+                            long:position.coords.longitude
+            Meteor.users.update Meteor.userId(),
+                $set:
+                    location:
+                        "type": "Point"
+                        "coordinates": [
+                            position.coords.longitude
+                            position.coords.latitude
+                        ]
+                    current_lat: position.coords.latitude
+                    current_long: position.coords.longitude
+                # , (err,res)->
+                #     console.log res
+
+        
+        
     #     $('.main_content')
     #         .transition('fade out', 250)
     #         .transition('fade in', 250)

@@ -94,6 +94,12 @@ if Meteor.isClient
                         latlng:
                             lat:position.coords.latitude
                             long:position.coords.longitude
+                if user_position_marker
+                    Markers.update user_position_marker,
+                        $set:
+                            latlng:
+                                lat:position.coords.latitude
+                                long:position.coords.longitude
                 Meteor.users.update Meteor.userId(),
                     $set:
                         location:
@@ -104,10 +110,10 @@ if Meteor.isClient
                             ]
                         current_lat: position.coords.latitude
                         current_long: position.coords.longitude
-                    , (err,res)->
-                        console.log res
-                console.log 'updated user', Meteor.user().current_location
-                Meteor.call 'tag_coordinates', user._id, position.coords.latitude, position.coords.longitude
+                    # , (err,res)->
+                    #     console.log res
+                # console.log 'updated user', Meteor.user().current_location
+                # Meteor.call 'tag_coordinates', user._id, position.coords.latitude, position.coords.longitude
                 console.log(position.coords.latitude, position.coords.longitude);
                         
                         
