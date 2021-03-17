@@ -141,7 +141,7 @@ if Meteor.isClient
 
     Template.profile.helpers
         route_slug: -> "user_#{@slug}"
-        user: -> Meteor.users.findOne username:Router.current().params.username
+        current_user: -> Meteor.users.findOne username:Router.current().params.username
         user_comment_count: -> Counts.get 'user_comment_count'
         user_post_count: -> Counts.get 'user_post_count'
 

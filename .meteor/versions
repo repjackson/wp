@@ -78,6 +78,8 @@ meteorhacks:collection-utils@1.2.0
 meteorspark:util@0.2.0
 minifiers@1.1.7
 minimongo@1.6.1
+mizzao:timesync@0.5.1
+mizzao:user-status@1.0.0
 mobile-experience@1.1.0
 mobile-status-bar@1.1.0
 modern-browsers@0.1.5

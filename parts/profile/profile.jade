@@ -1,18 +1,17 @@
 template(name='profile')
-    with user
+    with current_user
         .ui.stackable.padded.grid
-            if is_current_user
-                .centered.row
-                    if currentUser.light_mode
-                        .ui.basic.fluid.button.visible
-                            i.big.eye.link.icon
-                            | Visible Profile
-                    else
-                        .ui.basic.fluid.button.anonymous
-                            i.big.eye.slash.link.icon
-                            | Invisible Profile
-            .row
+            .centered.row
                 .sixteen.wide.center.aligned.column
+                    if is_current_user
+                        if currentUser.light_mode
+                            .ui.basic.inline.large.button.visible
+                                i.eye.link.icon
+                                | Visible Profile
+                        else
+                            .ui.basic.inline.large.button.anonymous
+                                i.eye.slash.link.icon
+                                | Invisible Profile
                     img.ui.centered.medium.circular.spaced.image.zoomer(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=light_mode_class)
                     div
                     span.mobile.only
@@ -26,6 +25,9 @@ template(name='profile')
                     if network_youtube
                         a.ui.circular.icon.red.button(href="https://www.youtube.com/#{network_youtube}" target="_window" title='visit youtube profile')
                             i.big.youtube.link.icon
+                    if network_twitter
+                        a.ui.circular.icon.blue.button(href="https://www.twitter.com/#{network_twitter}" target="_window" title='visit twitter profile')
+                            i.big.twitter.link.icon
                     if network_github
                         a.ui.circular.icon.button(href="https://www.github.com/#{network_github}" target="_window" title='visit github profile')
                             i.big.github.link.icon
@@ -71,6 +73,28 @@ template(name='profile')
                             // |log out
                     // if in_dev
                     //     +print_this
+                    .ui.seven.item.stackable.borderless.rounded.menu
+                        .item
+                            i.reply.icon
+                            |following
+                        .item
+                            i.undo.icon
+                            |followed by
+                        .item
+                            i.history.icon
+                            | history
+                        .item
+                            i.checkmark.icon
+                            |checkins
+                        .item
+                            i.smile.icon
+                            |friends
+                        .item
+                            i.rss.icon
+                            |notifications
+                        .item
+                            i.envelope.icon
+                            |messages
                     if is_current_user
                         .ui.stackable.padded.grid
                             .eight.wide.column
@@ -94,13 +118,6 @@ template(name='profile')
                             .eight.wide.column
                                 each tags
                                     .ui.basic.label #{this}
-                    .ui.menu
-                        .item following
-                        .item followed by
-                        .item visit history
-                        .item checkins
-                        .item notifications
-                        .item messages
                     .ui.header geocoded #{geocoded}     
                     .ui.big.list
                         .item category: #{category}
