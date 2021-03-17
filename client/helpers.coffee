@@ -126,6 +126,20 @@ Template.registerHelper 'is_video', () ->
             true
     # true
 
+Template.registerHelper 'online_users', ->
+    Meteor.users.find({ "status.online": true })
+
+
+Template.registerHelper 'labelClass', ->
+    if @status.idle
+        "label-warning"
+    else if @status.online
+        "label-success"
+    else
+        "label-default"
+
+
+
 Template.registerHelper 'is_admin', () ->
     Meteor.user() and Meteor.userId() in ['vwCi2GTJgvBJN5F6c','6qYmg67C6tZedpWXc']
 Template.registerHelper 'author', () ->

@@ -6,6 +6,9 @@ template(name='recently')
                 .ui.basic.button
                     i.plus.icon
                     |add live post
+                .ui.input
+                    input.add_live_post(type='text' placeholder="Type your live post...")
+                    
                 if adding_live_post
                     .ui.fluid.input
                         input.add_live_post(type='text' placeholder="Type your live post...")

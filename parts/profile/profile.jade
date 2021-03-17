@@ -3,55 +3,57 @@ template(name='profile')
         .ui.stackable.padded.grid
             .centered.row
                 .sixteen.wide.center.aligned.column
-                    if is_current_user
-                        if currentUser.light_mode
-                            .ui.basic.inline.large.button.visible
-                                i.eye.link.icon
-                                | Visible Profile
-                        else
-                            .ui.basic.inline.large.button.anonymous
-                                i.eye.slash.link.icon
-                                | Invisible Profile
                     img.ui.centered.medium.circular.spaced.image.zoomer(src="{{c.url profile_image_id height=500 width=500 gravity='face' crop='fill'}}" class=light_mode_class)
                     div
                     span.mobile.only
                         a(href="/user/#{username}/")
+                    .spacer
                     a.ui.header.refresh_user_stats(href="/user/#{username}") 
                         |#{name}
-    
+                    .spacer
+                    if is_current_user
+                        if currentUser.light_mode
+                            .ui.basic.large.icon.button.visible
+                                i.eye.link.big.icon
+                                // | Visible Profile
+                        else
+                            .ui.basic.large.icon.button.anonymous
+                                i.eye.slash.link.big.icon
+                                // | Invisible Profile
+                        if network_youtube
+                            a.ui.circular.icon.red.button(href="https://www.youtube.com/#{network_youtube}" target="_window" title='visit youtube profile')
+                                i.big.youtube.link.icon
+                        if network_twitter
+                            a.ui.circular.icon.blue.button(href="https://www.twitter.com/#{network_twitter}" target="_window" title='visit twitter profile')
+                                i.big.twitter.link.icon
+                        if network_github
+                            a.ui.circular.icon.button(href="https://www.github.com/#{network_github}" target="_window" title='visit github profile')
+                                i.big.github.link.icon
+                        if network_facebook
+                            a.ui.circular.icon.blue.button(href="https://www.facebook.com/#{network_facebook}" target="_window" title='visit facebook profile')
+                                i.big.facebook.link.icon
+                        if network_instagram
+                            a.ui.circular.icon.red.button(href="https://www.instagram.com/#{network_instagram}" target="_window" title='visit instagram profile')
+                                i.big.instagram.link.icon
+                        if network_linkedin
+                            a.ui.circular.icon.blue.button(href="https://www.linkedin.com/#{network_linkedin}" target="_window" title='visit linkedin profile')
+                                i.big.linkedin.link.icon
+                        if network_paypal
+                            a.ui.circular.icon.blue.button(href="https://www.paypal.com/#{network_paypal}" target="_window" title='visit paypal profile')
+                                i.big.paypal.link.icon
+                        if network_reddit
+                            a.ui.circular.icon.red.button(href="https://www.reddit.com/r/#{network_reddit}" target="_window" title='visit reddit profile')
+                                i.big.reddit.link.icon
+                        if network_reddit
+                            a.ui.circular.icon.button(href="https://www.medium.com/#{network_medium}" target="_window" title='visit medium profile')
+                                i.big.medium.link.icon
+                        if network_stackexchange
+                            a.ui.circular.icon.blue.button(href="https://www.stackexchange.com/#{network_stackexchange}" target="_window" title='visit stack exchange profile')
+                                i.big.stack.exchange.link.icon
+        
                     a.ui.small.header.refresh_user_stats(href="/user/#{username}") 
                         |@#{username}
                     .ui.label #{profile_views} views
-                    if network_youtube
-                        a.ui.circular.icon.red.button(href="https://www.youtube.com/#{network_youtube}" target="_window" title='visit youtube profile')
-                            i.big.youtube.link.icon
-                    if network_twitter
-                        a.ui.circular.icon.blue.button(href="https://www.twitter.com/#{network_twitter}" target="_window" title='visit twitter profile')
-                            i.big.twitter.link.icon
-                    if network_github
-                        a.ui.circular.icon.button(href="https://www.github.com/#{network_github}" target="_window" title='visit github profile')
-                            i.big.github.link.icon
-                    if network_facebook
-                        a.ui.circular.icon.blue.button(href="https://www.facebook.com/#{network_facebook}" target="_window" title='visit facebook profile')
-                            i.big.facebook.link.icon
-                    if network_instagram
-                        a.ui.circular.icon.red.button(href="https://www.instagram.com/#{network_instagram}" target="_window" title='visit instagram profile')
-                            i.big.instagram.link.icon
-                    if network_linkedin
-                        a.ui.circular.icon.blue.button(href="https://www.linkedin.com/#{network_linkedin}" target="_window" title='visit linkedin profile')
-                            i.big.linkedin.link.icon
-                    if network_paypal
-                        a.ui.circular.icon.blue.button(href="https://www.paypal.com/#{network_paypal}" target="_window" title='visit paypal profile')
-                            i.big.paypal.link.icon
-                    if network_reddit
-                        a.ui.circular.icon.red.button(href="https://www.reddit.com/r/#{network_reddit}" target="_window" title='visit reddit profile')
-                            i.big.reddit.link.icon
-                    if network_reddit
-                        a.ui.circular.icon.button(href="https://www.medium.com/#{network_medium}" target="_window" title='visit medium profile')
-                            i.big.medium.link.icon
-                    if network_stackexchange
-                        a.ui.circular.icon.blue.button(href="https://www.stackexchange.com/#{network_stackexchange}" target="_window" title='visit stack exchange profile')
-                            i.big.stack.exchange.link.icon
                     unless is_current_user
                         +user_follow_button
                     
@@ -73,26 +75,29 @@ template(name='profile')
                             // |log out
                     // if in_dev
                     //     +print_this
-                    .ui.seven.item.stackable.borderless.rounded.menu
-                        .item
+                    .ui.eight.item.stackable.borderless.rounded.menu
+                        a.item(href='/user/#{current_user.username}/profile')
+                            i.reply.icon
+                            |profile
+                        a.item(href='/user/#{current_user.username}/profile')
                             i.reply.icon
                             |following
-                        .item
+                        a.item(href='/user/#{current_user.username}/followed')
                             i.undo.icon
                             |followed by
-                        .item
+                        a.item(href='/user/#{current_user.username}/history')
                             i.history.icon
                             | history
-                        .item
+                        a.item(href='/user/#{current_user.username}/checkins')
                             i.checkmark.icon
                             |checkins
-                        .item
+                        a.item(href='/user/#{current_user.username}/friends')
                             i.smile.icon
                             |friends
-                        .item
+                        a.item(href='/user/#{current_user.username}/notifications')
                             i.rss.icon
                             |notifications
-                        .item
+                        a.item(href='/user/#{current_user.username}/messages')
                             i.envelope.icon
                             |messages
                     if is_current_user
@@ -118,9 +123,9 @@ template(name='profile')
                             .eight.wide.column
                                 each tags
                                     .ui.basic.label #{this}
-                    .ui.header geocoded #{geocoded}     
+                    // .ui.header geocoded #{geocoded}     
                     .ui.big.list
-                        .item category: #{category}
+                        .item location category: #{category}
                         .item #{long_form}
                     .ui.inline.small.grey.header(title='lat, long') #{current_lat}, #{current_long}                     
                     if current_position
