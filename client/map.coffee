@@ -72,7 +72,21 @@ Template.map.onRendered =>
                 # marker = L.marker(doc.latlng).on('click', (event)->
                 #     Markers.remove({_id: doc._id});
                 # );
-                L.marker([doc.latlng.lat, doc.latlng.lng]).addTo(map)
+                # console.log {{c.url currentUser.profile_image_id height=500 width=500 gravity='face' crop='fill'}}
+                myIcon = L.icon({
+                    iconUrl:"https://res.cloudinary.com/facet/image/upload/c_fill,g_face,h_300,w_100/#{Meteor.user().profile_image_id}"
+                    iconSize: [38, 95],
+                    iconAnchor: [22, 94],
+                    popupAnchor: [-3, -76],
+                    # shadowUrl: 'my-icon-shadow.png',
+                    shadowSize: [68, 95],
+                    shadowAnchor: [22, 94]
+                });
+
+                L.marker([doc.latlng.lat, doc.latlng.lng],{
+                    draggable:true
+                    icon:myIcon
+                    }).addTo(map)
                 # markers.addLayer(marker);
                 
             removed: (oldDocument)->

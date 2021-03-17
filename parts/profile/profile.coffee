@@ -69,7 +69,7 @@ if Meteor.isClient
                 Meteor.users.update Meteor.userId(),
                     $set:
                         location:
-                            "type": "Point",
+                            "type": "Point"
                             "coordinates": [
                                 position.coords.longitude
                                 position.coords.latitude
