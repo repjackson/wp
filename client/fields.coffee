@@ -60,7 +60,7 @@ Template.image_edit.events
             if doc
                 Docs.update parent._id,
                     $unset:"#{@key}":1
-           else 
+            else 
                 Meteor.users.update user._id,
                     $unset:"#{@key}":1
          

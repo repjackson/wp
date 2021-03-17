@@ -51,7 +51,7 @@ Template.map.onRendered =>
         # L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         #     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         #     maxZoom: 18,
-        #     id: 'mapbox/streets-v11',
+        #     id: 'mapbox/outdoors-v11',
         #     tileSize: 512,
         #     zoomOffset: -1,
         #     accessToken: 'your.mapbox.access.token'
@@ -61,7 +61,7 @@ Template.map.onRendered =>
             accessToken:"pk.eyJ1IjoicmVwamFja3NvbiIsImEiOiJja21iN3V5OWgwMGI4Mm5temU0ZHk3bjVsIn0.3nq7qTUAh0up18iIIuOPrQ"
             maxZoom: 19,
             minZoom: 19,
-            id: 'mapbox/streets-v11',
+            id: 'mapbox/outdoors-v11',
             tileSize: 512,
             zoomOffset: -1,
         }).addTo(map);
@@ -88,7 +88,7 @@ Template.map.onRendered =>
     # L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     #     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     #     maxZoom: 18,
-    #     id: 'mapbox/streets-v11',
+    #     id: 'mapbox/outdoors-v11',
     #     tileSize: 512,
     #     zoomOffset: -1,
     #     accessToken: 'your.mapbox.access.token'
@@ -143,7 +143,7 @@ Template.map.events
         # L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         #     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         #     maxZoom: 18,
-        #     id: 'mapbox/streets-v11',
+        #     id: 'mapbox/outdoors-v11',
         #     tileSize: 512,
         #     zoomOffset: -1,
         #     accessToken: 'your.mapbox.access.token'
@@ -153,7 +153,7 @@ Template.map.events
             accessToken:"pk.eyJ1IjoicmVwamFja3NvbiIsImEiOiJja21iN3V5OWgwMGI4Mm5temU0ZHk3bjVsIn0.3nq7qTUAh0up18iIIuOPrQ"
             maxZoom: 21,
             minZoom: 18,
-            id: 'mapbox/streets-v11',
+            id: 'mapbox/outdoors-v11',
             tileSize: 512,
             zoomOffset: -1,
         }).addTo(map);
