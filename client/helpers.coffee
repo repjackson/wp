@@ -15,7 +15,14 @@ Template.registerHelper 'emotion_selector_class', () ->
     else if @title is 'fear'
         'grey invert'
 Template.registerHelper 'light_mode_class', () ->
-    if Meteor.user() and Meteor.user().light_mode then '' else 'invert'
+    if Meteor.user()
+        if Meteor.user().light_mode
+            '' 
+        else 
+            'invert'
+    else 
+        '' 
+    
 Template.registerHelper 'light_mode', () ->
     Meteor.user() and Meteor.user().light_mode
 

@@ -1,10 +1,10 @@
 template(name='login')
     .ui.padded.stackable.grid
         .centered.row
-            .eight.wide.column
+            .eight.wide.center.aligned.column
                 .ui.center.aligned.basic.segment
-                    img(src="https://img.icons8.com/fluent/96/000000/owl.png")
-                    .ui.header WhooPeek
+                    img.ui.centered.medium.image(src="1.png")
+                    .ui.header login
                 div
                 if message
                     h4.ui.center.aligned.header #{message}
@@ -22,16 +22,16 @@ template(name='login')
                 //- if username
                 if logging_in
                     .spacer
-                    .ui.fluid.big.basic.button.enter(title="login #{username}" class=enter_class)
+                    .ui.fluid.large.button.enter(title="login #{username}" class=enter_class)
                         |login
                         strong #{username}
                         |&nbsp;
                         i.sign.in.alternate.icon
                 .ui.center.aligned.basic.segment    
-                    a.ui.basic.button(href='/register')
+                    a.ui.button(href='/register')
                         i.plus.icon
                         |register
-                    a.ui.basic.button(href='/forgot_password')
+                    a.ui.button(href='/forgot_password')
                         i.refresh.icon
                         |forgot password
 
@@ -41,16 +41,16 @@ template(name='register')
     //- img.ui.fluid.image.bg_overlay(src="{{c.url 'forest-bg2' width=1000 crop='fit'}}")    
     .ui.padded.stackable.grid
         .centered.middle.aligned.row
-            .ten.wide.column
+            .ten.wide.center.aligned.column
                 .ui.center.aligned.basic.segment
                     //- a.ui.icon.button(href="/")
                     //-     i.large.home.icon
                         
                     // div
                     // +icon name='circled' cl='ui inline image'
-                    img(src="https://img.icons8.com/fluent/48/000000/owl.png")
+                    img.ui.centered.medium.image(src="1.png")
                     .ui.big.inline.header register
-                .ui.header 
+                .ui.small.header 
                     i.user.outline.icon
                     |username
                 .ui.fluid.icon.input(class=login_class)
@@ -67,21 +67,21 @@ template(name='register')
                 //     else
                 //         i.ban.icon
                 //     input.email(type='text')
-                .ui.header 
-                    i.lock.grey.icon
+                .ui.small.header 
+                    i.lock.icon
                     // +icon name='password'
                     | password
                 .ui.fluid.input(class=login_class)
                     input.password(type='password')
                 //- .ui.fluid.labeled.input(class=login_class)
                 //-     .ui.small.inline.header 
-                //-         i.lock.grey.icon
+                //-         i.lock.icon
                 //-         | password again
                 //-     input.password2(type='password')
                 .ui.hidden.divider
                 if can_register
                     //- if registering
-                    .ui.fluid.big.basic.button.register(class=enter_class)
+                    .ui.fluid.big.button.register(class=enter_class)
                         i.user.plus.icon
                         |register
                 else
@@ -89,10 +89,10 @@ template(name='register')
                         i.user.plus.icon
                         |register
                     // // .ui.small.header username "#{username}" found
-                    a.ui.basic.fluid.button(href='/login') 
-                        i.right.chevron.icon
-                        // +icon name='internal' cl='ui inline image'
-                        |login
+                a.ui.button(href='/login') 
+                    // +icon name='internal' cl='ui inline image'
+                    |login
+                    i.sign.in.icon
                 // .ui.center.aligned.basic.segment    
                     // .ui.small.header by registering you agree to our 
                     //     a(href='/p/privacy' target="_window") privacy policy
