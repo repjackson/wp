@@ -83,9 +83,10 @@ Template.map.onRendered =>
                     shadowAnchor: [22, 94]
                 });
 
-                L.marker([doc.latlng.lat, doc.latlng.lng],{
+                L.marker([doc.latlng.lat, doc.latlng.long],{
                     draggable:true
-                    icon:myIcon
+                    # icon:myIcon
+                    riseOnHover:true
                     }).addTo(map)
                 # markers.addLayer(marker);
                 
@@ -106,7 +107,7 @@ Template.map.onRendered =>
             tileSize: 512,
             zoomOffset: -1,
         }).addTo(map);
-        L.marker([Session.get('current_lat'), Session.get('current_long')]).addTo(map)
+        # L.marker([Session.get('current_lat'), Session.get('current_long')]).addTo(map)
             # .openPopup();
             # .bindPopup('you')
         L.circle([Session.get('current_lat'), Session.get('current_long')], {

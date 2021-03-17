@@ -31,7 +31,7 @@ if Meteor.isClient
     
     Template.profile_layout.onCreated ->
         @autorun -> Meteor.subscribe 'current_user', Router.current().params.username
-        # @autorun -> Meteor.subscribe 'user_post_count', Router.current().params.username
+        @autorun -> Meteor.subscribe 'markers'
         @autorun -> Meteor.subscribe 'user_checkins', Router.current().params.username
         @autorun -> Meteor.subscribe 'user_live_posts', Router.current().params.username
         @autorun => Meteor.subscribe 'nearby_people', Router.current().params.username
@@ -43,7 +43,24 @@ if Meteor.isClient
         'click .anonymous': ->
             Meteor.users.update Meteor.userId(),
                 $set:light_mode:true
-       
+            navigator.geolocation.getCurrentPosition (position) =>
+                console.log 'updating position with', position
+                console.log 'saving long', position.coords.longitude
+                console.log 'saving lat', position.coords.latitude
+                Meteor.users.update Meteor.userId(),
+                    $set:
+                        current_position: position
+                        location:
+                            "type": "Point"
+                            "coordinates": [
+                                position.coords.longitude
+                                position.coords.latitude
+                            ]
+                        current_lat: position.coords.latitude
+                        current_long: position.coords.longitude
+                    , (err,res)->
+                        console.log res
+
         'click .refresh_position': ->
             pos = Geolocation.currentLocation()
             # if pos
@@ -66,6 +83,17 @@ if Meteor.isClient
             navigator.geolocation.getCurrentPosition (position) =>
                 console.log 'saving long', position.coords.longitude
                 console.log 'saving lat', position.coords.latitude
+                user_position_marker = 
+                    Markers.findOne
+                        _author_id: Meteor.userId()
+                        model:'user_marker'
+                unless user_position_marker
+                    Markers.insert 
+                        model:'user_marker'
+                        _author_id: Meteor.userId()
+                        latlng:
+                            lat:position.coords.latitude
+                            long:position.coords.longitude
                 Meteor.users.update Meteor.userId(),
                     $set:
                         location:
@@ -129,6 +157,7 @@ if Meteor.isClient
                 
             
     Template.profile_layout.helpers
+        markers: Markers.find()
         live_posts: -> 
             Docs.find {
                 model:'live_post'
@@ -144,6 +173,7 @@ if Meteor.isClient
                 model:'checkin'
 
         long_form: ->
+            console.log @geocoded
             @geocoded[0].formatted
         category: ->
             @geocoded[0].components._category

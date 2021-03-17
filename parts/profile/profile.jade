@@ -20,11 +20,11 @@ template(name='profile_layout')
                             if currentUser.light_mode
                                 .ui.basic.large.icon.button.visible
                                     i.eye.link.big.icon
-                                    // | Visible Profile
+                                    | Visible Profile
                             else
                                 .ui.basic.large.icon.button.anonymous
                                     i.eye.slash.link.big.icon
-                                    // | Invisible Profile
+                                    | Invisible Profile
                             if network_youtube
                                 a.ui.circular.icon.red.button(href="https://www.youtube.com/#{network_youtube}" target="_window" title='visit youtube profile')
                                     i.big.youtube.link.icon
@@ -137,6 +137,7 @@ template(name='profile')
             .eight.wide.column
                 +array_edit key='tags' label='tags' direct=true
             .ui.basic.circular.button.refresh_position
+                i.refresh.icon
                 |refresh position
     else 
         .ui.stackable.padded.grid
@@ -149,11 +150,10 @@ template(name='profile')
             .eight.wide.column
                 each tags
                     .ui.basic.label #{this}
-    // .ui.header geocoded #{geocoded}     
     .ui.big.list
         .item location category: #{category}
         .item #{long_form}
-    .ui.inline.small.grey.header(title='lat, long') #{current_lat}, #{current_long}                     
+    .ui.inline.small.header(title='lat, long') #{current_lat}, #{current_long}                     
     if current_position
         .ui.list
             with current_position.coords
@@ -165,7 +165,12 @@ template(name='profile')
                 .item longitude #{longitude}
                 .item speed #{speed}
                 .item timestamp #{timestamp}
-        
+    
+    .ui.header location
+
+    current_lat: position.coords.latitude
+    current_long: position.coords.longitude
+
     // .ui.header latest checkins
     // .ui.selection.list
     //     each user_checkins
