@@ -21,12 +21,15 @@ if Meteor.isClient
             if e.which is 13
                 e.preventDefault()
                 content = t.$('.add_live_post').val().trim()
-                if content.length>0
-                    parent = Template.parentData()
-                    Docs.insert 
-                        model:'live_post'
-                        content:content
-                    content = t.$('.add_live_post').val('')
+                user = Meteor.user()
+                if user and user.geocoded
+                    if content.length>0
+                        parent = Template.parentData()
+                        Docs.insert 
+                            model:'live_post'
+                            content:content
+                            long_form:user.geocoded[0].formatted
+                        content = t.$('.add_live_post').val('')
         'click .mark_viewed': ->
             console.log @
 
@@ -35,9 +38,14 @@ if Meteor.isClient
         
 if Meteor.isServer
     Meteor.publish 'recent_posts', ->
-        Docs.find 
-            model:'live_post'
-        , limit:20    
+        user = Meteor.user()
+        if user and user.geocoded
+            # console.log user.geocoded[0].components.formatted
+            console.log user.geocoded[0].formatted
+            Docs.find 
+                model:'live_post'
+                long_form:user.geocoded[0].formatted
+            , limit:100 
         
     Meteor.publish 'author_from_id', (doc_id)->
         doc = Docs.findOne doc_id

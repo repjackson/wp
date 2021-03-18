@@ -4,12 +4,12 @@ Template.registerHelper 'is_current_user', () ->
         Meteor.user().username is Router.current().params.username
 
 Template.registerHelper 'my_category', () ->
-    if Meteor.user()
+    if Meteor.user() and Meteor.user().geocoded
         Meteor.user().geocoded[0].components._category
 
 
 Template.registerHelper 'my_longform', () ->
-    if Meteor.user()
+    if Meteor.user() and Meteor.user().geocoded
         console.log Meteor.user().geocoded
         Meteor.user().geocoded[0].formatted
 
