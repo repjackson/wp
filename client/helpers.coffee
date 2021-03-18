@@ -1,7 +1,20 @@
 
 Template.registerHelper 'is_current_user', () ->
-    Meteor.user().username is Router.current().params.username
+    if Meteor.user()
+        Meteor.user().username is Router.current().params.username
 
+Template.registerHelper 'my_category', () ->
+    if Meteor.user()
+        Meteor.user().geocoded[0].components._category
+
+
+Template.registerHelper 'my_longform', () ->
+    if Meteor.user()
+        console.log Meteor.user().geocoded
+        Meteor.user().geocoded[0].formatted
+
+    
+    
 Template.registerHelper 'emotion_selector_class', () ->
     # console.log @
     if @title is 'anger'

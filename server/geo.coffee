@@ -18,7 +18,7 @@ Meteor.methods
                 if user
                     Meteor.users.update doc_id,
                         $set:geocoded:response.data.results
-                console.log 'working'
+                console.log 'working', response
 
         # https://api.opencagedata.com/geocode/v1/json?q=24.77701%2C%20121.02189&key=f234c66b8ec44a448f8cb6a883335718&language=en&pretty=1&no_annotations=1
         # https://api.opencagedata.com/geocode/v1/json?q=Dhumbarahi%2C%20Kathmandu&key=f234c66b8ec44a448f8cb6a883335718&language=en&pretty=1&no_annotations=1

@@ -95,7 +95,7 @@ if Meteor.isClient
                             lat:position.coords.latitude
                             long:position.coords.longitude
                 if user_position_marker
-                    Markers.update user_position_marker,
+                    Markers.update user_position_marker._id,
                         $set:
                             latlng:
                                 lat:position.coords.latitude
@@ -113,7 +113,7 @@ if Meteor.isClient
                     # , (err,res)->
                     #     console.log res
                 # console.log 'updated user', Meteor.user().current_location
-                # Meteor.call 'tag_coordinates', user._id, position.coords.latitude, position.coords.longitude
+                Meteor.call 'tag_coordinates', user._id, position.coords.latitude, position.coords.longitude, ->
                 console.log(position.coords.latitude, position.coords.longitude);
                         
                         
@@ -178,11 +178,12 @@ if Meteor.isClient
             Docs.find
                 model:'checkin'
 
-        long_form: ->
-            console.log @geocoded
-            @geocoded[0].formatted
-        category: ->
-            @geocoded[0].components._category
+    Template.profile.helpers
+        # long_form: ->
+        #     # console.log @geocoded
+        #     @geocoded[0].formatted
+        # category: ->
+        #     @geocoded[0].components._category
         
     
     Template.profile.onRendered ->
@@ -194,6 +195,12 @@ if Meteor.isClient
 
 
     Template.profile_layout.helpers
+        # route_slug: -> "user_#{@slug}"
+        current_user: -> Meteor.users.findOne username:Router.current().params.username
+        # user_comment_count: -> Counts.get 'user_comment_count'
+        # user_post_count: -> Counts.get 'user_post_count'
+
+    Template.profile.helpers
         # route_slug: -> "user_#{@slug}"
         current_user: -> Meteor.users.findOne username:Router.current().params.username
         # user_comment_count: -> Counts.get 'user_comment_count'

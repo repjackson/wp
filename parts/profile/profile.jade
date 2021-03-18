@@ -71,13 +71,13 @@ template(name='profile_layout')
                             a.ui.icon.button(href="/user/#{username}/edit" title='admin edit account')
                                 i.shield.large.icon
                                 // |account
-                        if is_current_user
-                            a.ui.icon.basic.button(href="/user/#{username}/edit" title='edit your account')
-                                i.cog.large.icon
-                                // |account
-                            a.ui.icon.basic.button.logout(href="#" title='log out')
-                                i.sign.out.large.icon
-                                // |log out
+                        // if is_current_user
+                        a.ui.icon.basic.button(href="/user/#{username}/edit" title='edit your account')
+                            i.cog.large.icon
+                            // |account
+                        a.ui.icon.basic.button.logout(href="#" title='log out')
+                            i.sign.out.large.icon
+                            // |log out
                         // if in_dev
                         //     +print_this
                     .twelve.wide.column
@@ -150,9 +150,10 @@ template(name='profile')
             .eight.wide.column
                 each tags
                     .ui.basic.label #{this}
-    .ui.big.list
-        .item location category: #{category}
-        .item #{long_form}
+    if is_current_user                
+        .ui.big.list
+            .item location category: #{my_category}
+            .item #{my_long_form}
     .ui.inline.small.header(title='lat, long') #{current_lat}, #{current_long}                     
     if current_position
         .ui.list

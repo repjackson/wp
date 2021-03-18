@@ -1,5 +1,5 @@
 template(name='nav')
-    .ui.fluid.attached.borderless.three.item.menu.topped(style="opacity:25% !important;")
+    .ui.fluid.attached.borderless.three.item.small.menu.topped(style="opacity:75% !important;")
         a.icon.item.zoomer(href="/recently" class="{{isActiveRoute regex='recently'}}")
             i.history.large.icon
         if currentUser.light_mode
@@ -24,7 +24,7 @@ template(name='map')
             |reload location data
     .ui.one.column.padded.grid
         .column
-            .ui.center.aligned.header People Near You
+            .ui.center.aligned.header People Near You: #{my_longform} (#{my_category})
             .ui.four.column.stackable.padded.centered.grid
                 each nearby_people
                     +nearby_person

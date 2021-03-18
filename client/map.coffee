@@ -35,7 +35,7 @@ Template.body.events
                         lat:position.coords.latitude
                         long:position.coords.longitude
             if user_position_marker
-                Markers.update user_position_marker,
+                Markers.update user_position_marker._id,
                     $set:
                         latlng:
                             lat:position.coords.latitude
@@ -92,10 +92,10 @@ Template.map.onRendered =>
         
         # L.tileLayer.provider('Stamen.Watercolor').addTo(map);
         
-        map.on('dblclick', (event)->
-            console.log 'clicked', event
-            Markers.insert({latlng: event.latlng});
-        )
+        # map.on('dblclick', (event)->
+        #     console.log 'clicked', event
+        #     Markers.insert({latlng: event.latlng});
+        # )
         # // add clustermarkers
         # markers = L.markerClusterGroup();
         # map.addLayer(markers);
@@ -120,7 +120,7 @@ Template.map.onRendered =>
 
                 L.marker([doc.latlng.lat, doc.latlng.long],{
                     draggable:true
-                    # icon:myIcon
+                    icon:myIcon
                     riseOnHover:true
                     }).addTo(map)
                 # markers.addLayer(marker);
